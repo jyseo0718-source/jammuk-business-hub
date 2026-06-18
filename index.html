@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>잼먹 도쿄 출장 v1</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>🗼 잼먹 도쿄 출장</h1>
+      <p>2026.6.24 - 6.26 · 팀 공유 베타</p>
+    </div>
+    <span id="syncBadge" class="badge">연결 준비중</span>
+  </header>
+
+  <main>
+    <section id="home" class="page on">
+      <div class="hero">
+        <div class="label">출장까지</div>
+        <div id="dday" class="dday">D-?</div>
+      </div>
+      <div class="grid">
+        <div class="card"><b id="todayCount">0</b><span>오늘 일정</span></div>
+        <div class="card"><b id="companyCount">0</b><span>업체</span></div>
+        <div class="card"><b id="memoCount">0</b><span>메모</span></div>
+        <div class="card"><b id="doneCount">0</b><span>완료</span></div>
+      </div>
+      <h2>오늘/첫날 일정</h2>
+      <div id="todayList"></div>
+    </section>
+
+    <section id="schedule" class="page">
+      <h2>📅 출장 일정</h2>
+      <div class="tabs" id="dayTabs"></div>
+      <div id="scheduleList"></div>
+      <div class="form card2">
+        <h3>일정 추가</h3>
+        <input id="schTime" placeholder="시간 예: 10:00" />
+        <input id="schTitle" placeholder="일정명" />
+        <input id="schPlace" placeholder="장소/메모" />
+        <button onclick="addSchedule()">+ 추가</button>
+      </div>
+    </section>
+
+    <section id="companies" class="page">
+      <h2>🏢 업체</h2>
+      <input id="search" class="search" placeholder="업체 검색" oninput="renderCompanies()" />
+      <div id="companyList"></div>
+      <div class="form card2">
+        <h3>업체 추가</h3>
+        <input id="coName" placeholder="업체명" />
+        <select id="coCat"><option>베이비&키즈</option><option>키친웨어</option><option>식품</option><option>OEM</option><option>기타</option></select>
+        <input id="coBooth" placeholder="부스번호" />
+        <button onclick="addCompany()">+ 업체 추가</button>
+      </div>
+    </section>
+
+    <section id="check" class="page">
+      <h2>✅ 체크리스트</h2>
+      <div id="checkList"></div>
+      <div class="form card2">
+        <input id="checkText" placeholder="체크 항목 추가" />
+        <button onclick="addCheck()">+ 추가</button>
+      </div>
+    </section>
+
+    <section id="budget" class="page">
+      <h2>💰 예산</h2>
+      <div class="hero small"><span>총 사용</span><b id="budgetTotal">₩0</b></div>
+      <div id="expenseList"></div>
+      <div class="form card2">
+        <h3>지출 추가</h3>
+        <input id="exName" placeholder="항목" />
+        <input id="exAmt" type="number" placeholder="금액" />
+        <select id="exCat"><option>교통</option><option>식비</option><option>숙박</option><option>항공</option><option>기타</option></select>
+        <button onclick="addExpense()">+ 지출 추가</button>
+      </div>
+    </section>
+
+    <section id="report" class="page">
+      <h2>📊 보고서</h2>
+      <div id="reportBox" class="card2"></div>
+      <button onclick="window.print()">PDF 저장/인쇄</button>
+    </section>
+  </main>
+
+  <nav>
+    <button class="on" onclick="go('home',this)">🏠<span>홈</span></button>
+    <button onclick="go('schedule',this)">📅<span>일정</span></button>
+    <button onclick="go('companies',this)">🏢<span>업체</span></button>
+    <button onclick="go('check',this)">✅<span>체크</span></button>
+    <button onclick="go('budget',this)">💰<span>예산</span></button>
+    <button onclick="go('report',this)">📊<span>보고서</span></button>
+  </nav>
+  <script src="app.js"></script>
+</body>
+</html>
