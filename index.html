@@ -1,100 +1,81 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>잼먹 도쿄 출장 v1</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>잼먹 도쿄 출장 허브</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f5efe6;--card:#fffaf2;--ink:#2f281f;--muted:#8a7b68;--line:#e7dccb;--main:#6b5443;--accent:#b57b4a;--good:#5c8a4e;--warn:#c2843e;--bad:#b0533f;--white:#fff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic",sans-serif;max-width:520px;margin:0 auto;padding:0 0 82px;font-size:15px}button,input,textarea,select{font:inherit}.top{position:sticky;top:0;background:rgba(245,239,230,.96);backdrop-filter:blur(8px);z-index:9;padding:17px 18px 11px;border-bottom:1px solid rgba(231,220,203,.65)}h1{font-size:20px;margin:0;font-weight:850;letter-spacing:-.5px}.sub{font-size:12px;color:var(--muted);margin-top:3px}.sync{display:inline-flex;gap:5px;align-items:center;margin-top:9px;background:#e2eedc;color:#4d783f;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:700}.dot{width:7px;height:7px;border-radius:50%;background:#5c8a4e}.page{display:none;padding:14px 14px}.page.on{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px;box-shadow:0 1px 0 rgba(0,0,0,.02)}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px}.lab{font-size:11px;color:var(--muted);font-weight:700}.val{font-size:23px;font-weight:900;margin-top:2px;letter-spacing:-.5px}h2{font-size:13px;color:var(--muted);margin:0 0 12px;font-weight:850;text-transform:uppercase;letter-spacing:.3px}.big{font-size:32px;font-weight:950;letter-spacing:-1px}.seg{display:flex;gap:7px;overflow:auto;padding-bottom:2px;margin-bottom:12px}.seg button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:12px;padding:9px 12px;font-weight:800;font-size:12px}.seg button.on{background:var(--main);color:white;border-color:var(--main)}.item{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px;margin-bottom:9px}.item.done{opacity:.58}.time{font-size:12px;font-weight:900;color:var(--accent);min-width:72px}.name{font-weight:850;font-size:15px;line-height:1.3}.meta{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.45}.pill{font-size:10px;font-weight:900;border-radius:999px;padding:3px 8px;background:#f0e6d8;color:#77583b;display:inline-block;margin-right:4px}.btn{border:0;background:var(--main);color:white;font-weight:900;border-radius:13px;padding:11px 13px;cursor:pointer}.btn.ghost{background:#fff;color:var(--main);border:1px solid var(--line)}.btn.small{padding:7px 10px;font-size:12px}.tools{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.map{color:var(--accent);border:1px solid #ead7c4;background:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:850;text-decoration:none}.fav{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 8px}.fav.on{background:#fff3c5;border-color:#e2c45b}.chkrow{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px;margin-bottom:8px}.box{width:25px;height:25px;border:2px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0}.box.on{background:var(--good);border-color:var(--good)}.txt.done{text-decoration:line-through;color:var(--muted)}input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 11px;color:var(--ink);outline:none}textarea{min-height:82px;resize:vertical}.field{margin-bottom:10px}.field label{display:block;font-size:11px;color:var(--muted);font-weight:850;margin:0 0 5px}.modal{position:fixed;inset:0;background:rgba(45,35,26,.35);z-index:30;display:none;align-items:flex-end}.modal.on{display:flex}.sheet{background:var(--bg);width:100%;max-width:520px;margin:0 auto;border-radius:22px 22px 0 0;max-height:88vh;overflow:auto;padding:16px}.x{border:0;background:#eadfce;border-radius:50%;width:32px;height:32px;font-weight:900}.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:1px solid var(--line);display:flex;z-index:20;padding:8px 0 9px}.nav button{flex:1;border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:800;display:flex;flex-direction:column;gap:3px;align-items:center}.nav button.on{color:var(--main)}.ic{font-size:20px}.photoGrid{display:flex;gap:8px;flex-wrap:wrap}.photo{width:70px;height:70px;border:1px solid var(--line);border-radius:12px;object-fit:cover;background:#fff}.addPhoto{width:70px;height:70px;border:1.5px dashed #cdbfaa;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:900;background:#fff}.addPhoto input{display:none}.empty{text-align:center;color:var(--muted);padding:24px 0;font-size:13px}.reportLine{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:9px 0}.reportLine:last-child{border-bottom:0}.tagP1{background:#f2d8d2;color:#a0412d}.tagP2{background:#f2e0c8;color:#a26724}.tagP3{background:#e6eddc;color:#56764a}.warn{color:var(--bad)}.search{margin-bottom:10px}.sectionTitle{font-size:14px;font-weight:950;margin:18px 2px 8px;color:var(--main)}@media print{.top,.nav,.btn,.tools,.seg{display:none}.page{display:block}.card{break-inside:avoid}body{max-width:none;background:white}}
+</style>
 </head>
 <body>
-  <header class="top">
-    <div>
-      <h1>🗼 잼먹 도쿄 출장</h1>
-      <p>2026.6.24 - 6.26 · 팀 공유 베타</p>
-    </div>
-    <span id="syncBadge" class="badge">연결 준비중</span>
-  </header>
-
-  <main>
-    <section id="home" class="page on">
-      <div class="hero">
-        <div class="label">출장까지</div>
-        <div id="dday" class="dday">D-?</div>
-      </div>
-      <div class="grid">
-        <div class="card"><b id="todayCount">0</b><span>오늘 일정</span></div>
-        <div class="card"><b id="companyCount">0</b><span>업체</span></div>
-        <div class="card"><b id="memoCount">0</b><span>메모</span></div>
-        <div class="card"><b id="doneCount">0</b><span>완료</span></div>
-      </div>
-      <h2>오늘/첫날 일정</h2>
-      <div id="todayList"></div>
-    </section>
-
-    <section id="schedule" class="page">
-      <h2>📅 출장 일정</h2>
-      <div class="tabs" id="dayTabs"></div>
-      <div id="scheduleList"></div>
-      <div class="form card2">
-        <h3>일정 추가</h3>
-        <input id="schTime" placeholder="시간 예: 10:00" />
-        <input id="schTitle" placeholder="일정명" />
-        <input id="schPlace" placeholder="장소/메모" />
-        <button onclick="addSchedule()">+ 추가</button>
-      </div>
-    </section>
-
-    <section id="companies" class="page">
-      <h2>🏢 업체</h2>
-      <input id="search" class="search" placeholder="업체 검색" oninput="renderCompanies()" />
-      <div id="companyList"></div>
-      <div class="form card2">
-        <h3>업체 추가</h3>
-        <input id="coName" placeholder="업체명" />
-        <select id="coCat"><option>베이비&키즈</option><option>키친웨어</option><option>식품</option><option>OEM</option><option>기타</option></select>
-        <input id="coBooth" placeholder="부스번호" />
-        <button onclick="addCompany()">+ 업체 추가</button>
-      </div>
-    </section>
-
-    <section id="check" class="page">
-      <h2>✅ 체크리스트</h2>
-      <div id="checkList"></div>
-      <div class="form card2">
-        <input id="checkText" placeholder="체크 항목 추가" />
-        <button onclick="addCheck()">+ 추가</button>
-      </div>
-    </section>
-
-    <section id="budget" class="page">
-      <h2>💰 예산</h2>
-      <div class="hero small"><span>총 사용</span><b id="budgetTotal">₩0</b></div>
-      <div id="expenseList"></div>
-      <div class="form card2">
-        <h3>지출 추가</h3>
-        <input id="exName" placeholder="항목" />
-        <input id="exAmt" type="number" placeholder="금액" />
-        <select id="exCat"><option>교통</option><option>식비</option><option>숙박</option><option>항공</option><option>기타</option></select>
-        <button onclick="addExpense()">+ 지출 추가</button>
-      </div>
-    </section>
-
-    <section id="report" class="page">
-      <h2>📊 보고서</h2>
-      <div id="reportBox" class="card2"></div>
-      <button onclick="window.print()">PDF 저장/인쇄</button>
-    </section>
-  </main>
-
-  <nav>
-    <button class="on" onclick="go('home',this)">🏠<span>홈</span></button>
-    <button onclick="go('schedule',this)">📅<span>일정</span></button>
-    <button onclick="go('companies',this)">🏢<span>업체</span></button>
-    <button onclick="go('check',this)">✅<span>체크</span></button>
-    <button onclick="go('budget',this)">💰<span>예산</span></button>
-    <button onclick="go('report',this)">📊<span>보고서</span></button>
-  </nav>
-  <script src="app.js"></script>
+<header class="top"><h1>🗼 잼먹 도쿄 출장 허브</h1><div class="sub">2026.6.24(수) – 6.26(금) · 호텔 몬토레 긴자</div><span class="sync"><span class="dot"></span><span id="syncText">팀 공유 연결중</span></span></header>
+<main>
+<section class="page on" id="home"><div class="card"><div class="row"><h2 style="margin:0">출장까지</h2><span class="pill" id="ddayPill">D-?</span></div><div class="big" id="dday">–</div></div><div class="grid"><div class="stat"><div class="lab">오늘 일정</div><div class="val" id="todayCnt">0</div></div><div class="stat"><div class="lab">업체</div><div class="val" id="companyCnt">0</div></div><div class="stat"><div class="lab">메모</div><div class="val" id="memoCnt">0</div></div><div class="stat"><div class="lab">완료</div><div class="val" id="doneCnt">0</div></div></div><div class="card"><h2 id="todayTitle">오늘/첫날 일정</h2><div id="todayList"></div></div></section>
+<section class="page" id="schedule"><div class="card"><h2>출장 일정</h2><div class="seg" id="daySeg"><button class="on" onclick="setDay('6/24',this)">6/24</button><button onclick="setDay('6/25',this)">6/25</button><button onclick="setDay('6/26',this)">6/26</button></div><div id="scheduleList"></div></div></section>
+<section class="page" id="companies"><div class="card"><h2>업체 리스트</h2><input class="search" id="q" oninput="renderCompanies()" placeholder="업체/카테고리/메모 검색"><div class="seg" id="catSeg"><button class="on" onclick="setCat('all',this)">전체</button><button onclick="setCat('fav',this)">★관심</button><button onclick="setCat('베이비',this)">베이비</button><button onclick="setCat('키친',this)">키친</button><button onclick="setCat('식품',this)">식품</button><button onclick="setCat('OEM',this)">OEM</button></div><div id="companyList"></div></div></section>
+<section class="page" id="check"><div class="card"><h2>출장 체크리스트</h2><div class="seg"><button class="on" onclick="setCheck('before',this)">출장 전</button><button onclick="setCheck('during',this)">현장</button><button onclick="setCheck('after',this)">출장 후</button></div><div id="checkList"></div><div class="row" style="margin-top:12px"><input id="newCheck" placeholder="체크 항목 추가"><button class="btn small" onclick="addCheck()">추가</button></div></div></section>
+<section class="page" id="budget"><div class="card"><h2>예산/교통비</h2><div class="grid"><div class="stat"><div class="lab">예상 사용</div><div class="val" id="usedAmt">₩0</div></div><div class="stat"><div class="lab">엔화 환산</div><div class="val" id="usedYen">¥0</div></div></div><div id="budgetList" style="margin-top:12px"></div><div class="sectionTitle">지출 추가</div><div class="field"><input id="bName" placeholder="항목명 예: 점심"></div><div class="grid"><input id="bKrw" type="number" placeholder="원화"><input id="bYen" type="number" placeholder="엔화"></div><button class="btn" style="width:100%;margin-top:10px" onclick="addBudget()">+ 추가</button></div></section>
+<section class="page" id="report"><div class="card"><h2>출장 보고서</h2><div id="reportLines"></div></div><div class="card"><h2>관심 업체 TOP</h2><div id="topCompanies"></div></div><button class="btn" style="width:calc(100% - 28px);margin:0 14px" onclick="window.print()">PDF 저장/인쇄</button></section>
+</main>
+<nav class="nav"><button class="on" onclick="go('home',this)"><span class="ic">🏠</span>홈</button><button onclick="go('schedule',this)"><span class="ic">📅</span>일정</button><button onclick="go('companies',this)"><span class="ic">🏢</span>업체</button><button onclick="go('check',this)"><span class="ic">✅</span>체크</button><button onclick="go('budget',this)"><span class="ic">💴</span>예산</button><button onclick="go('report',this)"><span class="ic">📊</span>보고서</button></nav>
+<div class="modal" id="modal"><div class="sheet"><div class="row"><h1 id="mName">업체명</h1><button class="x" onclick="closeModal()">×</button></div><div class="meta" id="mMeta"></div><div class="tools"><button class="fav" id="mFav" onclick="toggleFav(currentId)">★ 관심</button><a class="map" id="mMap" target="_blank">📍 지도</a></div><div class="sectionTitle">상담 정보</div><div class="grid"><div class="field"><label>담당자</label><input id="mContact" oninput="updateCompany('contact',this.value)"></div><div class="field"><label>이메일</label><input id="mEmail" oninput="updateCompany('email',this.value)"></div></div><div class="grid"><div class="field"><label>MOQ</label><input id="mMoq" oninput="updateCompany('moq',this.value)"></div><div class="field"><label>단가</label><input id="mPrice" oninput="updateCompany('price',this.value)"></div></div><div class="field"><label>관심도</label><select id="mPriority" onchange="updateCompany('priority',this.value)"><option>P1</option><option>P2</option><option>P3</option></select></div><div class="field"><label>메모</label><textarea id="mMemo" oninput="updateCompany('memo',this.value)" placeholder="상담내용, 제품 특징, 가격, 후속 연락 등"></textarea></div><div class="field"><label>잼먹 적용 아이디어</label><textarea id="mIdea" oninput="updateCompany('idea',this.value)" placeholder="잼먹 제품/상세페이지/소싱 적용 아이디어"></textarea></div><div class="sectionTitle">사진</div><div class="photoGrid" id="photoGrid"></div><label class="addPhoto">＋<input type="file" accept="image/*" capture="environment" onchange="addPhoto(this)"></label></div></div>
+<script>
+const SUPABASE_URL='https://xdjnbjgjydvhllyzalpx.supabase.co';
+const SUPABASE_KEY='sb_publishable_OutO4MsrAC6cAs2n1brQwg_L2y3jv4B';
+const STATE_ID='jammuk-tokyo-trip-2026-v4';
+let supa=null; try{supa=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)}catch(e){}
+function id(){return Math.random().toString(36).slice(2,10)}
+function defaultState(){return{rate:9.45,day:'6/24',cat:'all',checkTab:'before',schedule:[
+{id:id(),day:'6/24',time:'07:30',name:'김해공항 출발',type:'flight',note:'김해 → 나리타, 여권/항공권 확인',done:false},
+{id:id(),day:'6/24',time:'09:30',name:'나리타 도착',type:'flight',note:'입국 · NEX/스이카 준비',done:false},
+{id:id(),day:'6/24',time:'10:18',name:'나리타 → 긴자 이동',type:'move',note:'NEX 이용, 시부야/도쿄역 경유 확인',done:false},
+{id:id(),day:'6/24',time:'11:30',name:'호텔 몬토레 긴자 짐 보관',type:'hotel',note:'체크인 전 짐 보관',map:'https://maps.google.com/?q=Hotel+Monterey+Ginza',done:false},
+{id:id(),day:'6/24',time:'12:00',name:'긴자 점심',type:'meal',note:'근처 식당 후보 선택',done:false},
+{id:id(),day:'6/24',time:'13:30',name:'아카짱혼포 긴시초',type:'visit',note:'유아용품/이유식/식기 리서치',map:'https://maps.google.com/?q=Akachan+Honpo+Kinshicho',done:false},
+{id:id(),day:'6/24',time:'17:30',name:'토이저러스·베이비저러스 이케부쿠로',type:'visit',note:'영유아/완구/육아용품 시장조사',map:'https://maps.google.com/?q=ToysRUs+BabiesRUs+Ikebukuro',done:false},
+{id:id(),day:'6/25',time:'09:00',name:'호텔 → 도쿄 빅사이트',type:'move',note:'유라쿠초선 + 유리카모메',done:false},
+{id:id(),day:'6/25',time:'10:00',name:'LIFESTYLE Week TOKYO',type:'expo',note:'베이비&키즈, 키친웨어, 굿푸드, OEM 중심 방문',map:'https://maps.google.com/?q=Tokyo+Big+Sight',done:false},
+{id:id(),day:'6/25',time:'12:30',name:'빅사이트 점심',type:'meal',note:'전시장 내 간단 식사',done:false},
+{id:id(),day:'6/25',time:'13:30',name:'전시회 업체 상담',type:'expo',note:'명함/카탈로그/MOQ/단가 확인',done:false},
+{id:id(),day:'6/25',time:'18:30',name:'긴자 리테일 조사',type:'visit',note:'무인양품 긴자, 핸즈 긴자, 로프트 긴자',map:'https://maps.google.com/?q=MUJI+Ginza',done:false},
+{id:id(),day:'6/26',time:'09:00',name:'에토와루 카이토 도매상',type:'visit',note:'회원가입/도매 제품 리서치',map:'https://maps.google.com/?q=ETOILE+KAITO+Tokyo',done:false},
+{id:id(),day:'6/26',time:'12:00',name:'점심 및 정리',type:'meal',note:'영수증/사진/명함 1차 정리',done:false},
+{id:id(),day:'6/26',time:'13:00',name:'공항 이동',type:'move',note:'도쿄역 → 나리타 NEX',done:false},
+{id:id(),day:'6/26',time:'17:10',name:'나리타 출발',type:'flight',note:'김해 19:15 도착 예정',done:false}],companies:[
+{name:'Miniware',cat:'베이비&키즈',booth:'',priority:'P1',fav:true,memo:'이유식 식기/스푼 라인 확장 검토',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Pigeon',cat:'베이비&키즈',booth:'',priority:'P1',fav:true,memo:'젖병/육아용품 시장 가격 확인',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Combi',cat:'베이비&키즈',booth:'',priority:'P2',fav:false,memo:'유아용품 카테고리 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'HABA',cat:'베이비&키즈',booth:'',priority:'P2',fav:false,memo:'소재/안전성 소구 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Edison',cat:'키친/유아식기',booth:'',priority:'P1',fav:true,memo:'유아 식기/스푼 구조 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Kinto',cat:'키친웨어',booth:'',priority:'P2',fav:false,memo:'감성 테이블웨어/패키지 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Skater',cat:'키친웨어',booth:'',priority:'P2',fav:false,memo:'캐릭터 식기/도시락 용품 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Marna',cat:'생활/키친',booth:'',priority:'P2',fav:false,memo:'생활소품 패키지/기능성 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'Good Food Zone',cat:'식품',booth:'',priority:'P1',fav:true,memo:'간식/티/원물 제품 트렌드 확인',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'OEM Sourcing Zone',cat:'OEM',booth:'',priority:'P1',fav:true,memo:'MOQ, 단가, 샘플 가능 여부 필수 확인',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'GIFTEX',cat:'기프트/인테리어',booth:'',priority:'P3',fav:false,memo:'선물세트 패키지/구성 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]},
+{name:'DESIGN TOKYO',cat:'디자인',booth:'',priority:'P2',fav:false,memo:'브랜딩/전시 연출/디자인 상품 참고',contact:'',email:'',moq:'',price:'',idea:'',photos:[]}
+].map(c=>Object.assign({id:id()},c)),checks:{before:[{t:'여권/항공권 확인',d:false},{t:'Visit Japan 등록',d:false},{t:'NEX/스이카 준비',d:false},{t:'명함 준비',d:false},{t:'보조배터리/충전기',d:false},{t:'박람회 방문 우선순위 공유',d:false}],during:[{t:'업체별 명함 받기',d:false},{t:'부스/제품 사진 촬영',d:false},{t:'MOQ 확인',d:false},{t:'단가/샘플 가능 여부 확인',d:false},{t:'카탈로그/브로슈어 확보',d:false},{t:'영수증 사진 저장',d:false}],after:[{t:'사진 정리',d:false},{t:'명함/담당자 입력',d:false},{t:'관심 업체 TOP 정리',d:false},{t:'후속 메일 발송',d:false},{t:'출장보고서 PDF 저장',d:false}]},budget:[{id:id(),name:'항공권',krw:380000,yen:0},{id:id(),name:'호텔 2박',krw:610000,yen:0},{id:id(),name:'NEX 왕복',krw:0,yen:6140},{id:id(),name:'시내 교통 예상',krw:0,yen:4000},{id:id(),name:'식비 예상',krw:0,yen:15000}]}}
+let state=defaultState();let timer=null;let currentId=null;
+async function load(){try{const {data,error}=await supa.from('app_state').select('data').eq('id',STATE_ID).maybeSingle();if(!error&&data?.data)state=data.data;else await saveNow();document.getElementById('syncText').textContent='팀 공유 연결됨';supa.channel('trip').on('postgres_changes',{event:'*',schema:'public',table:'app_state',filter:'id=eq.'+STATE_ID},p=>{if(p.new?.data){state=p.new.data;renderAll()}}).subscribe()}catch(e){document.getElementById('syncText').textContent='내 기기 저장';const r=localStorage.getItem(STATE_ID);if(r)state=JSON.parse(r)}}
+async function saveNow(){try{await supa.from('app_state').upsert({id:STATE_ID,data:state,updated_at:new Date().toISOString()})}catch(e){localStorage.setItem(STATE_ID,JSON.stringify(state))}}
+function save(){clearTimeout(timer);timer=setTimeout(saveNow,350)}
+function won(n){return '₩'+Math.round(n||0).toLocaleString('ko-KR')}function yen(n){return '¥'+Math.round(n||0).toLocaleString('ko-KR')}function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function go(p,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(p).classList.add('on');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderAll();window.scrollTo(0,0)}
+function todayDay(){let now=new Date(),d=new Date(2026,5,24);if(now<d)return'6/24';if(now<=new Date(2026,5,24,23,59))return'6/24';if(now<=new Date(2026,5,25,23,59))return'6/25';return'6/26'}
+function rowSchedule(s){return `<div class="item ${s.done?'done':''}"><div class="row"><span class="time">${esc(s.time)}</span><button class="box ${s.done?'on':''}" onclick="toggleSched('${s.id}')">${s.done?'✓':''}</button></div><div class="name">${icon(s.type)} ${esc(s.name)}</div><div class="meta">${esc(s.note)}</div><div class="tools">${s.map?`<a class="map" target="_blank" href="${s.map}">📍 지도</a>`:''}</div></div>`}
+function icon(t){return{flight:'✈️',move:'🚇',hotel:'🏨',meal:'🍴',visit:'📍',expo:'🏢'}[t]||'•'}
+function renderHome(){let trip=new Date(2026,5,24),now=new Date(),d=Math.ceil((trip-now)/(864e5));document.getElementById('dday').textContent=d>0?d+'일 남음':d===0?'D-DAY':'출장 진행/완료';document.getElementById('ddayPill').textContent=d>0?'D-'+d:d===0?'D-DAY':'DONE';let td=todayDay();let today=state.schedule.filter(s=>s.day===td);document.getElementById('todayCnt').textContent=today.length;document.getElementById('companyCnt').textContent=state.companies.length;document.getElementById('memoCnt').textContent=state.companies.filter(c=>c.memo||c.idea).length;document.getElementById('doneCnt').textContent=state.schedule.filter(s=>s.done).length;document.getElementById('todayTitle').textContent=td+' 일정';document.getElementById('todayList').innerHTML=today.map(rowSchedule).join('')||'<div class="empty">일정 없음</div>'}
+function setDay(d,b){state.day=d;document.querySelectorAll('#daySeg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderSchedule();save()}function renderSchedule(){document.getElementById('scheduleList').innerHTML=state.schedule.filter(s=>s.day===state.day).map(rowSchedule).join('')}function toggleSched(i){let s=state.schedule.find(x=>x.id===i);s.done=!s.done;renderAll();save()}
+function setCat(c,b){state.cat=c;document.querySelectorAll('#catSeg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderCompanies();save()}function renderCompanies(){let q=document.getElementById('q')?.value?.toLowerCase()||'';let list=state.companies.filter(c=>{let text=(c.name+' '+c.cat+' '+c.memo+' '+c.idea).toLowerCase();let cat=state.cat==='all'||(state.cat==='fav'?c.fav:text.includes(state.cat.toLowerCase()));return cat&&text.includes(q)});document.getElementById('companyList').innerHTML=list.map(c=>`<div class="item" onclick="openCompany('${c.id}')"><div class="row"><div><span class="pill ${'tag'+c.priority}">${c.priority}</span><span class="pill">${esc(c.cat)}</span></div><button class="fav ${c.fav?'on':''}" onclick="event.stopPropagation();toggleFav('${c.id}')">★</button></div><div class="name">${esc(c.name)}</div><div class="meta">${esc(c.memo||'메모 없음')}</div><div class="tools"><span class="map">사진 ${(c.photos||[]).length}</span><span class="map">MOQ ${esc(c.moq||'-')}</span></div></div>`).join('')||'<div class="empty">업체 없음</div>'}
+function openCompany(i){currentId=i;let c=state.companies.find(x=>x.id===i);document.getElementById('mName').textContent=c.name;document.getElementById('mMeta').textContent=(c.cat||'')+(c.booth?' · 부스 '+c.booth:'');document.getElementById('mFav').classList.toggle('on',!!c.fav);document.getElementById('mMap').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(c.name+' Tokyo Big Sight');['Contact','Email','Moq','Price','Memo','Idea','Priority'].forEach(k=>{let el=document.getElementById('m'+k);if(el)el.value=c[k.toLowerCase()]||''});renderPhotos(c);document.getElementById('modal').classList.add('on')}function closeModal(){document.getElementById('modal').classList.remove('on');currentId=null}function updateCompany(k,v){let c=state.companies.find(x=>x.id===currentId);c[k]=v;renderCompanies();renderReport();save()}function toggleFav(i){let c=state.companies.find(x=>x.id===i);c.fav=!c.fav;renderCompanies();if(currentId===i)document.getElementById('mFav')?.classList.toggle('on',c.fav);save()}
+function renderPhotos(c){document.getElementById('photoGrid').innerHTML=(c.photos||[]).map(p=>`<img class="photo" src="${p}">`).join('')}function addPhoto(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{let c=state.companies.find(x=>x.id===currentId);c.photos=c.photos||[];c.photos.push(e.target.result);renderPhotos(c);save()};r.readAsDataURL(f);input.value=''}
+function setCheck(tab,b){state.checkTab=tab;document.querySelectorAll('#check .seg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderCheck();save()}function renderCheck(){let a=state.checks[state.checkTab];document.getElementById('checkList').innerHTML=a.map((c,i)=>`<div class="chkrow"><button class="box ${c.d?'on':''}" onclick="toggleCheck(${i})">${c.d?'✓':''}</button><div class="txt ${c.d?'done':''}">${esc(c.t)}</div></div>`).join('')}function toggleCheck(i){state.checks[state.checkTab][i].d=!state.checks[state.checkTab][i].d;renderAll();save()}function addCheck(){let v=document.getElementById('newCheck').value.trim();if(!v)return;state.checks[state.checkTab].push({t:v,d:false});document.getElementById('newCheck').value='';renderCheck();save()}
+function renderBudget(){let krw=0,y=0;state.budget.forEach(b=>{krw+=+b.krw||0;y+=+b.yen||0});document.getElementById('usedAmt').textContent=won(krw+y*state.rate);document.getElementById('usedYen').textContent=yen(y);document.getElementById('budgetList').innerHTML=state.budget.map(b=>`<div class="item"><div class="row"><div><div class="name">${esc(b.name)}</div><div class="meta">${won(b.krw)} ${b.yen?'/ '+yen(b.yen):''}</div></div><button class="btn ghost small" onclick="delBudget('${b.id}')">삭제</button></div></div>`).join('')}function addBudget(){let n=document.getElementById('bName').value.trim();if(!n)return;state.budget.push({id:id(),name:n,krw:+document.getElementById('bKrw').value||0,yen:+document.getElementById('bYen').value||0});document.getElementById('bName').value='';document.getElementById('bKrw').value='';document.getElementById('bYen').value='';renderBudget();save()}function delBudget(i){state.budget=state.budget.filter(b=>b.id!==i);renderBudget();save()}
+function renderReport(){let done=state.schedule.filter(s=>s.done).length;let checks=Object.values(state.checks).flat();let cd=checks.filter(c=>c.d).length;let photos=state.companies.reduce((s,c)=>s+(c.photos||[]).length,0);document.getElementById('reportLines').innerHTML=`<div class="reportLine"><span>방문 일정 완료</span><b>${done}/${state.schedule.length}</b></div><div class="reportLine"><span>등록 업체</span><b>${state.companies.length}</b></div><div class="reportLine"><span>관심 업체</span><b>${state.companies.filter(c=>c.fav).length}</b></div><div class="reportLine"><span>사진</span><b>${photos}장</b></div><div class="reportLine"><span>체크리스트</span><b>${cd}/${checks.length}</b></div>`;document.getElementById('topCompanies').innerHTML=state.companies.filter(c=>c.fav||c.priority==='P1').slice(0,8).map(c=>`<div class="item"><span class="pill ${'tag'+c.priority}">${c.priority}</span><div class="name">${esc(c.name)}</div><div class="meta">${esc(c.memo||'')}</div></div>`).join('')}
+function renderAll(){renderHome();renderSchedule();renderCompanies();renderCheck();renderBudget();renderReport()}
+load().then(renderAll);
+</script>
 </body>
 </html>
