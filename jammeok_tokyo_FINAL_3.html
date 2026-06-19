@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>잼먹팀 도쿄 출장 — 6월</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF9;--bg2:#F3F2F0;--bg3:#ECEAE6;
+  --text:#1C1B19;--text2:#5C5B57;--text3:#9B9A96;
+  --border:#E5E3DE;--border2:#D0CEC9;
+  --green:#1D9E75;--green-bg:#E8F7F2;
+  --blue:#2563EB;--blue-bg:#EFF4FF;
+  --orange:#D97706;--orange-bg:#FEF3C7;
+  --red:#DC2626;--red-bg:#FEE2E2;
+  --purple:#7C3AED;--purple-bg:#EDE9FE;
+  --gray-bg:#F1F0EC;--gray-text:#5C5B57;
+  --radius:12px;--radius-sm:8px;--radius-xs:6px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.app{max-width:440px;margin:0 auto;padding-bottom:80px}
+/* header */
+.header{padding:20px 16px 0;margin-bottom:4px}
+.header h1{font-size:19px;font-weight:700;letter-spacing:-.3px}
+.header .sub{font-size:12px;color:var(--text3);margin-top:3px}
+.badge-row{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:500;padding:3px 9px;border-radius:20px}
+.b-date{background:var(--blue-bg);color:var(--blue)}
+.b-hotel{background:var(--green-bg);color:var(--green)}
+.b-flight{background:var(--purple-bg);color:var(--purple)}
+/* tabs */
+.tabs{display:flex;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;padding:0 4px}
+.tab{flex:1;padding:11px 2px 9px;font-size:11px;font-weight:500;text-align:center;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;transition:all .15s;line-height:1.3}
+.tab.on{color:var(--text);border-bottom-color:var(--text)}
+.tab-icon{font-size:18px;display:block;margin-bottom:2px}
+.page{display:none;padding:14px 14px 0}.page.on{display:block}
+/* section label */
+.sl{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.6px;text-transform:uppercase;margin:16px 0 7px}
+/* card */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow)}
+/* day tabs */
+.day-tabs{display:flex;gap:6px;margin-bottom:12px}
+.dtab{flex:1;padding:8px 4px;font-size:12px;font-weight:600;text-align:center;cursor:pointer;border-radius:var(--radius-sm);border:1px solid var(--border);color:var(--text2);background:#fff;transition:all .15s}
+.dtab.on{background:var(--text);color:#fff;border-color:var(--text)}
+.dp{display:none}.dp.on{display:block}
+/* timeline */
+.tl{position:relative;padding-left:34px}
+.tl-line{position:absolute;left:11px;top:8px;bottom:8px;width:1.5px;background:var(--border)}
+.sr{position:relative}
+.sd{position:absolute;left:-23px;top:14px;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg);z-index:1}
+.d-move{background:#9B9A96}.d-place{background:var(--green)}.d-eat{background:var(--orange)}
+.d-hotel{background:var(--blue)}.d-expo{background:var(--red)}.d-airport{background:var(--purple)}
+.sc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:11px 13px;margin-bottom:8px;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s}
+.sc:hover{border-color:var(--border2)}
+.sh{display:flex;align-items:flex-start;gap:8px}
+.st2{font-size:11px;color:var(--text3);min-width:38px;padding-top:2px;flex-shrink:0}
+.sn{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+.ss{font-size:11px;color:var(--text2);margin-top:2px;line-height:1.5}
+.bg{display:inline-block;font-size:10px;font-weight:500;padding:1px 7px;border-radius:20px;margin-right:3px;margin-bottom:3px}
+.b-move{background:var(--gray-bg);color:var(--gray-text)}.b-place{background:var(--green-bg);color:var(--green)}
+.b-eat{background:var(--orange-bg);color:var(--orange)}.b-hotel{background:var(--blue-bg);color:var(--blue)}
+.b-expo{background:var(--red-bg);color:var(--red)}.b-airport{background:var(--purple-bg);color:var(--purple)}
+.db{display:none;margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:var(--radius-sm);font-size:11px;line-height:1.8;color:var(--text2)}
+.db.open{display:block}
+.tp{display:inline-flex;align-items:center;gap:3px;background:#fff;border:1px solid var(--border);border-radius:20px;padding:2px 8px;font-size:10px;color:var(--text2);margin:2px 2px 2px 0}
+.tpa{background:var(--bg2)}
+.tip-row{font-size:11px;color:var(--green);margin-top:5px;display:flex;align-items:flex-start;gap:4px}
+.warn-row{font-size:11px;color:var(--orange);margin-top:5px;display:flex;align-items:flex-start;gap:4px}
+.dsum{display:flex;gap:8px;margin-bottom:12px}
+.dsc{flex:1;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 8px;text-align:center;box-shadow:var(--shadow)}
+.dsn{font-size:14px;font-weight:700;color:var(--text)}
+.dsl{font-size:10px;color:var(--text3);margin-top:2px}
+/* 장소탭 */
+.place-tabs{display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap}
+.ptab{padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;border-radius:var(--radius-sm);border:1px solid var(--border);color:var(--text2);background:#fff;transition:all .15s}
+.ptab.on{background:var(--text);color:#fff;border-color:var(--text)}
+.psec{display:none}.psec.on{display:block}
+.map-hint{font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.5}
+.place-link{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;text-decoration:none;color:var(--text);box-shadow:var(--shadow);transition:border-color .15s}
+.place-link:hover{border-color:var(--blue);color:var(--blue)}
+.place-link-icon{font-size:16px;flex-shrink:0}
+.place-link-name{font-size:13px;font-weight:500;flex:1}
+.place-link-arrow{font-size:12px;color:var(--text3)}
+/* 편의시설 */
+.atip{font-size:11px;color:var(--text2);background:var(--bg2);border-radius:var(--radius-sm);padding:9px 12px;margin-bottom:10px;line-height:1.6;border:1px solid var(--border)}
+.area-map-btn{display:inline-flex;align-items:center;gap:5px;margin-bottom:12px;font-size:12px;font-weight:500;padding:7px 13px;border-radius:var(--radius-sm);border:1px solid var(--blue);color:var(--blue);background:var(--blue-bg);text-decoration:none;transition:all .15s}
+.area-map-btn:hover{background:var(--blue);color:#fff}
+.tyl{font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;margin:14px 0 7px}
+.cvc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:12px 13px;margin-bottom:8px;box-shadow:var(--shadow)}
+.cvh{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.cvi{font-size:16px;width:34px;height:34px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.i-s{background:var(--green-bg)}.i-m{background:var(--orange-bg)}.i-w{background:var(--blue-bg)}.i-c{background:var(--purple-bg)}
+.cvn{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.cvd{font-size:11px;color:var(--text2);margin-top:2px}
+.cvt{font-size:11px;color:var(--text3);margin-top:4px}
+.cvno{font-size:11px;color:var(--text2);margin-top:4px;background:var(--bg2);padding:3px 9px;border-radius:var(--radius-xs);display:inline-block}
+.map-btn{display:inline-flex;align-items:center;gap:4px;margin-top:9px;font-size:11px;font-weight:500;padding:5px 11px;border-radius:var(--radius-xs);border:1px solid var(--blue);color:var(--blue);background:var(--blue-bg);text-decoration:none;transition:all .15s}
+.map-btn:hover{background:var(--blue);color:#fff}
+/* 준비물 */
+.prog-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow)}
+.prog-track{flex:1;height:6px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;border-radius:4px;background:var(--green);transition:width .3s}
+.prog-label{font-size:12px;font-weight:500;color:var(--text2);white-space:nowrap}
+.ci{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.ci:last-child{border-bottom:none}
+.cb2{width:18px;height:18px;border:1.5px solid var(--border2);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cb2.ck{background:var(--green);border-color:var(--green)}
+.ck-ico{display:none;width:10px;height:10px}
+.cb2.ck .ck-ico{display:block}
+.cl2{font-size:13px;font-weight:500;color:var(--text)}
+.cl2.dn{text-decoration:line-through;color:var(--text3)}
+.cs{font-size:11px;color:var(--text3);margin-top:1px}
+/* 언어 */
+.lt-tabs{display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap}
+.ltab{padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;border-radius:var(--radius-sm);border:1px solid var(--border);color:var(--text2);background:#fff;transition:all .15s}
+.ltab.on{background:var(--text);color:#fff;border-color:var(--text)}
+.lsec{display:none}.lsec.on{display:block}
+.pc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow)}
+.pc-head{font-size:11px;font-weight:500;color:var(--text3);margin-bottom:9px;display:flex;justify-content:space-between;align-items:center}
+.cpb{font-size:11px;padding:3px 9px;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-weight:500;transition:all .15s}
+.cpb:hover{background:var(--text);color:#fff;border-color:var(--text)}
+.cpb.copied{background:var(--green);color:#fff;border-color:var(--green)}
+.lr{margin-bottom:6px;display:flex;align-items:baseline;gap:7px}
+.ltg{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:20px;flex-shrink:0}
+.lt-jp{background:var(--purple-bg);color:var(--purple)}.lt-ro{background:var(--gray-bg);color:var(--gray-text)}
+.lt-en{background:var(--blue-bg);color:var(--blue)}.lt-ko{background:var(--green-bg);color:var(--green)}
+.lj{font-size:15px;font-weight:600;color:var(--text)}
+.lo{font-size:11px;color:var(--text2)}
+.le2{font-size:13px;color:var(--text)}
+.lk{font-size:11px;color:var(--text3)}
+/* iframe map */
+.map-frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md)}
+/* CRM */
+.crm-search{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.crm-input{flex:1;padding:9px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:#fff;color:var(--text);outline:none;transition:border-color .15s}
+.crm-input:focus{border-color:var(--blue)}
+.crm-count{font-size:11px;color:var(--text3);white-space:nowrap}
+.crm-filters{display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap}
+.crf{padding:5px 11px;font-size:11px;font-weight:500;cursor:pointer;border-radius:20px;border:1px solid var(--border);background:#fff;color:var(--text2);transition:all .15s;white-space:nowrap}
+.crf.on{background:var(--text);color:#fff;border-color:var(--text)}
+.cc{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s;overflow:hidden}
+.cc:hover{border-color:var(--border2)}
+.cc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px}
+.cc-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;flex:1;word-break:break-word;overflow-wrap:anywhere}
+.cc-booth{font-size:11px;color:var(--text3);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:20px;flex-shrink:0}
+.cc-cat{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px;background:var(--blue-bg);color:var(--blue);margin-bottom:0;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom}
+.cc-cat-more{display:inline-block;font-size:10px;color:var(--text3);margin-left:4px}
+.cc-desc{font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:6px;word-break:break-word;overflow-wrap:anywhere}
+.cc-detail{display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.cc-detail.open{display:block}
+.cc-row{font-size:11px;color:var(--text2);margin-bottom:4px;display:flex;gap:5px}
+.cc-row span:last-child{word-break:break-word;overflow-wrap:anywhere;flex:1;min-width:0}
+.cc-label{color:var(--text3);flex-shrink:0;min-width:48px;font-weight:500}
+.cc-memo{width:100%;margin-top:8px;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:12px;font-family:inherit;color:var(--text);background:var(--bg);resize:vertical;min-height:60px;outline:none;transition:border-color .15s}
+.cc-memo:focus{border-color:var(--blue)}
+.cc-save{margin-top:8px;width:100%;padding:9px 14px;font-size:12px;font-weight:600;border-radius:var(--radius-xs);border:none;color:#fff;background:var(--text);cursor:pointer;transition:all .15s}
+.cc-save:hover{background:var(--blue)}
+.cc-saved{background:var(--green)!important}
+/* 관심 버튼 */
+.cc-interest{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border2);background:#fff;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text2)}
+.cc-interest.on{background:#FFF9EC;border-color:#F59E0B;color:#D97706}
+/* 별점 */
+.stars{display:flex;gap:3px;margin:4px 0}
+.star{font-size:20px;cursor:pointer;color:var(--border2);transition:color .1s;line-height:1}
+.star.on{color:#F59E0B}
+/* 입력 폼 */
+.cc-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.cc-field{display:flex;flex-direction:column;gap:4px}
+.cc-field label{font-size:11px;font-weight:500;color:var(--text3)}
+.cc-input{padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-xs);font-size:12px;font-family:inherit;color:var(--text);background:#fff;outline:none;transition:border-color .15s;width:100%}
+.cc-input:focus{border-color:var(--blue)}
+.cc-section-title{font-size:11px;font-weight:600;color:var(--text3);margin:10px 0 5px;letter-spacing:.3px}
+.crm-loading{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
+.crm-error{background:var(--red-bg);border:1px solid #fca5a5;border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;color:var(--red);margin-bottom:12px}
+.cc-link{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:var(--blue);text-decoration:none;padding:3px 8px;border:1px solid var(--blue-bg);border-radius:20px;background:var(--blue-bg);margin-right:4px;margin-top:4px}
+.cc-link:hover{background:var(--blue);color:#fff}
+.crm-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:13px}
+.memo-star{display:inline-block;width:8px;height:8px;background:var(--orange);border-radius:50%;margin-left:4px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>🗼 잼먹팀 도쿄 출장</h1>
+    <div class="sub">2026년 6월 24일(수) ~ 26일(금)</div>
+    <div class="badge-row">
+      <span class="badge b-date">📅 6/24~26</span>
+      <span class="badge b-hotel">🏨 호텔 몬토레 긴자</span>
+      <span class="badge b-flight">✈️ 김해 ↔ 나리타</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" onclick="sw('schedule')"><span class="tab-icon">📅</span>일정</div>
+    <div class="tab" onclick="sw('places')"><span class="tab-icon">📍</span>장소</div>
+    <div class="tab" onclick="sw('checklist')"><span class="tab-icon">✅</span>준비물</div>
+    <div class="tab" onclick="sw('phrases')"><span class="tab-icon">🗣</span>언어</div>
+    <div class="tab" onclick="sw('crm');initCRM()"><span class="tab-icon">🏢</span>업체</div>
+  </div>
+
+  <!-- 일정 -->
+  <div id="schedule" class="page on">
+    <div class="day-tabs">
+      <div class="dtab on" onclick="swD(0)">6/24 수</div>
+      <div class="dtab" onclick="swD(1)">6/25 목</div>
+      <div class="dtab" onclick="swD(2)">6/26 금</div>
+    </div>
+    <div id="d0" class="dp on"></div>
+    <div id="d1" class="dp"></div>
+    <div id="d2" class="dp"></div>
+  </div>
+
+  <!-- 장소 -->
+  <div id="places" class="page">
+    <div class="place-tabs">
+      <div class="ptab on" onclick="swP('p-map')">🗺 전체 지도</div>
+      <div class="ptab" onclick="swP('p-ginza')">긴자</div>
+      <div class="ptab" onclick="swP('p-kinshi')">긴시초</div>
+      <div class="ptab" onclick="swP('p-ikebukuro')">이케부쿠로</div>
+      <div class="ptab" onclick="swP('p-bigsight')">빅사이트</div>
+    </div>
+    <div id="p-map" class="psec on">
+      <p class="map-hint">📌 핀을 탭하면 구글 지도로 바로 연결돼요</p>
+      <div class="map-frame">
+        <iframe width="100%" height="440" frameborder="0" style="display:block" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/search?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFmBWY&q=Baby+Kids+EXPO+Tokyo+Big+Sight,Akachan+Honpo+Kinshicho,Toys+R+Us+Ikebukuro,Tokyu+Hands+Ginza,MUJI+Ginza,Ginza+Loft,Meidi-ya+Kyobashi,Etoile+Kaito+Nihonbashi,Hotel+Monterey+Ginza&zoom=12&center=35.6727,139.7675">
+        </iframe>
+      </div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px">
+        <a href="https://maps.google.com/?cid=11876362316687890945" target="_blank" class="place-link"><span class="place-link-icon">🎪</span><span class="place-link-name">도쿄 빅사이트 (박람회)</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=5050612237799933902" target="_blank" class="place-link"><span class="place-link-icon">👶</span><span class="place-link-name">아카짱혼포 · arcakit 긴시초 5F</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=4215605841239768467" target="_blank" class="place-link"><span class="place-link-icon">🧸</span><span class="place-link-name">토이저러스 · 이케부쿠로 선샤인시티 B1</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=2337757795199347901" target="_blank" class="place-link"><span class="place-link-icon">🛍</span><span class="place-link-name">Tokyu Hands 긴자 5~9F</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=771702428473144825" target="_blank" class="place-link"><span class="place-link-icon">🛍</span><span class="place-link-name">무인양품 긴자 1~5F</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=3620508382511668300" target="_blank" class="place-link"><span class="place-link-icon">🛍</span><span class="place-link-name">로프트 긴자 1~5F</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=16623117133533361133" target="_blank" class="place-link"><span class="place-link-icon">🍱</span><span class="place-link-name">메디야 쿄바시 (식품)</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=2947255788002629266" target="_blank" class="place-link"><span class="place-link-icon">🏪</span><span class="place-link-name">에토와루 카이토 (도매상)</span><span class="place-link-arrow">→</span></a>
+        <a href="https://maps.google.com/?cid=7799335036286934329" target="_blank" class="place-link"><span class="place-link-icon">🏨</span><span class="place-link-name">호텔 몬토레 긴자 (숙소)</span><span class="place-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div id="p-ginza" class="psec"></div>
+    <div id="p-kinshi" class="psec"></div>
+    <div id="p-ikebukuro" class="psec"></div>
+    <div id="p-bigsight" class="psec"></div>
+  </div>
+
+  <!-- 준비물 -->
+  <div id="checklist" class="page">
+    <div class="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" id="pfill" style="width:0%"></div></div>
+      <span class="prog-label" id="plabel">0 / 0</span>
+    </div>
+    <div class="sl">이동</div><div id="cl-travel"></div>
+    <div class="sl">시장조사</div><div id="cl-market"></div>
+    <div class="sl">개인 품목</div><div id="cl-personal"></div>
+    <div class="sl">기타</div><div id="cl-etc"></div>
+  </div>
+
+  <!-- 언어 -->
+  <div id="phrases" class="page">
+    <div class="lt-tabs">
+      <div class="ltab on" onclick="swL('la')">공항·교통</div>
+      <div class="ltab" onclick="swL('ls')">쇼핑</div>
+      <div class="ltab" onclick="swL('lb')">비즈니스</div>
+      <div class="ltab" onclick="swL('lf')">식당</div>
+      <div class="ltab" onclick="swL('lh')">호텔</div>
+      <div class="ltab" onclick="swL('le')">긴급</div>
+    </div>
+    <div id="la" class="lsec on"></div><div id="ls" class="lsec"></div>
+    <div id="lb" class="lsec"></div><div id="lf" class="lsec"></div>
+    <div id="lh" class="lsec"></div><div id="le" class="lsec"></div>
+  </div>
+
+  <!-- 업체 CRM -->
+  <div id="crm" class="page">
+    <div class="crm-search">
+      <input class="crm-input" id="crm-q" type="search" placeholder="🔍 업체명 · 카테고리 · 주요제품 · 회사소개 검색..." oninput="filterCRM()" autocomplete="off">
+      <span class="crm-count" id="crm-count"></span>
+    </div>
+    <div class="crm-filters" id="crm-filters">
+      <button class="crf on" onclick="setCat('',this)">전체</button>
+    </div>
+    <div id="crm-body"><div class="crm-loading">🏢 업체 탭을 클릭하면 목록을 불러옵니다</div></div>
+  </div>
+
+</div>
+
+<script>
+const pids=['schedule','places','checklist','phrases','crm'];
+function sw(id){
+  document.querySelectorAll('.tabs .tab').forEach((t,i)=>t.classList.toggle('on',pids[i]===id));
+  document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id===id));
+}
+function swD(i){
+  document.querySelectorAll('#schedule .dtab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  ['d0','d1','d2'].forEach(id=>document.getElementById(id).classList.toggle('on',id==='d'+i));
+}
+function swP(id){
+  const ids=['p-map','p-ginza','p-kinshi','p-ikebukuro','p-bigsight'];
+  document.querySelectorAll('.place-tabs .ptab').forEach((t,i)=>t.classList.toggle('on',ids[i]===id));
+  document.querySelectorAll('.psec').forEach(s=>s.classList.toggle('on',s.id===id));
+}
+function swL(id){
+  const ids=['la','ls','lb','lf','lh','le'];
+  document.querySelectorAll('.lt-tabs .ltab').forEach((t,i)=>t.classList.toggle('on',ids[i]===id));
+  document.querySelectorAll('.lsec').forEach(s=>s.classList.toggle('on',s.id===id));
+}
+
+/* 일정 */
+const dd=[
+  {s:{st:7,tr:'약 120분',wk:'약 25분'},steps:[
+    {t:'airport',tm:'09:30',b:'공항',n:'나리타공항 T1 도착',sb:'NEX + 웰컴 스이카 구매',tr:[['나리타공항','NEX 60분','신바시역'],['도보 10분','','호텔']],no:['NEX 지정석 · 짐 선반'],tip:'신바시 하차 → 호텔 도보 10분'},
+    {t:'hotel',tm:'11:30',b:'숙소',n:'호텔 몬토레 긴자',sb:'체크인 15:00 전이면 짐 맡기고 출발',tr:[],no:[],tip:'짐 맡기고 몸만 가볍게'},
+    {t:'eat',tm:'12:00',b:'점심',n:'긴자 점심 3택1',sb:'Shigetsu / 야마짱라멘 / 토리긴 솥밥',tr:[],no:['야마짱라멘 16:00 마감 · 일 휴무'],warn:'야마짱라멘 16:00 마감!'},
+    {t:'move',tm:'13:30',b:'이동',n:'긴자 → 긴시초 · 25분',sb:'아사쿠사선 + 가즈사이치노미야선',tr:[['히가시긴자','아사쿠사선 8분','히가시니혼바시'],['도보 4분 → 가즈사이치노미야선 6분','','긴시초역']],no:['스이카 통합 결제']},
+    {t:'place',tm:'14:00',b:'방문',n:'arcakit 긴시초 · 4시간',sb:'아카짱혼포 5F + 다이소 7F',tr:[],no:['면세 5,000엔 이상'],tip:'면세카운터 마감 전 정산 몰아서'},
+    {t:'move',tm:'18:00',b:'이동',n:'긴시초 → 이케부쿠로 · 45분',sb:'주오소부선 + 마루노우치선',tr:[['긴시초','주오소부선 20분','오차노미즈'],['도보 3분 → 마루노우치선 18분','','이케부쿠로']],warn:'짐 많으면 코인로커 활용'},
+    {t:'place',tm:'18:45',b:'방문',n:'토이저러스 이케부쿠로 · 3시간',sb:'선샤인시티 B1 · 21:00 마감',tr:[],no:['동쪽 출구 도보 10분'],warn:'20:30까지는 입장해야 함'},
+    {t:'eat',tm:'20:30',b:'저녁',n:'이케부쿠로 저녁 3택1',sb:'수프카레 / 코코이치방야 / 규카츠 이로하',tr:[],no:[]},
+    {t:'move',tm:'21:30',b:'이동',n:'이케부쿠로 → 긴자 · 30분',sb:'마루노우치선',tr:[['이케부쿠로','마루노우치선 20분','긴자역'],['도보 10분','','호텔']],no:['막차 23시대']}
+  ]},
+  {s:{st:5,tr:'약 90분',wk:'약 20분'},steps:[
+    {t:'hotel',tm:'06:30',b:'조식',n:'호텔 조식',sb:'06:30~09:30',tr:[],no:['명함 · 등록증 챙기기'],tip:'9:00 출발 → 10:00 딱 맞게 도착'},
+    {t:'move',tm:'09:00',b:'이동',n:'긴자 → 아리아케 · 40분',sb:'유라쿠초선 + 유리카모메',tr:[['긴자이쵸메','유라쿠초선 12분','도요스'],['도보 5분 → 유리카모메 12분','','아리아케']],no:['스이카'],warn:'유리카모메 메트로패스 불가'},
+    {t:'expo',tm:'10:00',b:'박람회',n:'Baby & Kids EXPO · 7시간',sb:'10:00~17:00 · 카탈로그·명함 교환',tr:[],no:['오전 전체 순회 → 오후 심화 상담','빅사이트 로손 — 점심 전 미리 구매'],tip:'오전 일찍 돌아야 상담 여유 생김'},
+    {t:'move',tm:'17:30',b:'이동',n:'아리아케 → 긴자 · 40분',sb:'유리카모메 + 유라쿠초선',tr:[['아리아케','유리카모메 12분','도요스'],['유라쿠초선 12분','','긴자이쵸메']],no:['호텔에 짐 내려두고 쇼핑']},
+    {t:'place',tm:'18:30',b:'쇼핑',n:'긴자 저녁 쇼핑 · 도보',sb:'메디야 → 무인양품 → 핸즈 → 로프트',tr:[['메디야 쿄바시','도보 10분','무인양품'],['도보 3분','','핸즈 9F'],['도보 2분','','로프트']],no:['무인양품·핸즈·로프트 21:00까지'],warn:'메디야 20:00 마감 — 가장 먼저!',tip:'긴자 전부 도보 10분 내'}
+  ]},
+  {s:{st:4,tr:'약 120분',wk:'약 15분'},steps:[
+    {t:'hotel',tm:'06:30',b:'조식',n:'호텔 조식 & 체크아웃',sb:'체크아웃 11:00 이전',tr:[],no:['캐리어 → 도쿄역 코인로커'],tip:'도쿄역 로커에 맡기면 나리타까지 바로'},
+    {t:'move',tm:'08:15',b:'이동',n:'긴자 → 에토와루 카이토 · 15분',sb:'아사쿠사선',tr:[['히가시긴자','아사쿠사선 8분','히가시니혼바시'],['도보 5분','','에토와루 카이토']],no:['히가시니혼바시 A2 출구']},
+    {t:'place',tm:'09:00',b:'방문',n:'에토와루 카이토 · 4시간',sb:'09:00~16:00 · 토일 휴무',tr:[],no:['회원증 지참 필수','사진 촬영 금지','도매가·MOQ·수출 질문 목록 준비'],tip:'오전 일찍일수록 직원 여유 있어 상담 좋음'},
+    {t:'eat',tm:'13:00',b:'점심',n:'코코이치방야 · 도보 3분',sb:'일본식 카레',tr:[],no:[]},
+    {t:'move',tm:'13:40',b:'이동',n:'바쿠로초 → 나리타 · 80분',sb:'소부선 쾌속 + NEX',tr:[['바쿠로초','소부선 5분','도쿄역'],['NEX 60분','','나리타 T1']],warn:'캐리어는 반드시 엘리베이터 이용',tip:'14:00대 NEX 탑승 시 17:10 탑승 여유'},
+    {t:'airport',tm:'15:00',b:'공항',n:'나리타공항 — 귀국',sb:'17:10 부산행',tr:[],no:['수하물 위탁 → 출국심사 → 탑승구'],tip:'출국심사 30분 이상 여유 두기'}
+  ]}
+];
+dd.forEach((day,di)=>{
+  const el=document.getElementById('d'+di);
+  const s=day.s;
+  let h=`<div class="dsum"><div class="dsc"><div class="dsn">${s.st}</div><div class="dsl">방문 장소</div></div><div class="dsc"><div class="dsn">${s.tr}</div><div class="dsl">총 이동</div></div><div class="dsc"><div class="dsn">${s.wk}</div><div class="dsl">도보</div></div></div><div class="tl"><div class="tl-line"></div>`;
+  day.steps.forEach(step=>{
+    const tr=(step.tr||[]).map(([a,l,b])=>`<div style="display:flex;align-items:center;flex-wrap:wrap;gap:3px;margin-bottom:3px"><span class="tp">📍 ${a}</span><span style="font-size:10px;color:var(--text3)">→</span><span class="tp tpa">🚃 ${l}</span>${b?`<span style="font-size:10px;color:var(--text3)">→</span><span class="tp">📍 ${b}</span>`:''}</div>`).join('');
+    const no=(step.no||[]).map(n=>`<div style="display:flex;gap:5px;margin-bottom:2px"><span style="color:var(--text3)">·</span><span>${n}</span></div>`).join('');
+    const tip=step.tip?`<div class="tip-row">💡 ${step.tip}</div>`:'';
+    const warn=step.warn?`<div class="warn-row">⚠️ ${step.warn}</div>`:'';
+    const hasD=tr||no||tip||warn;
+    h+=`<div class="sr"><div class="sd d-${step.t}"></div><div class="sc" ${hasD?'onclick="this.querySelector(\'.db\').classList.toggle(\'open\')"':''}>
+      <div class="sh"><div class="st2">${step.tm}</div><div style="flex:1"><span class="bg b-${step.t}">${step.b}</span><div class="sn">${step.n}</div><div class="ss">${step.sb}</div></div>${hasD?'<span style="font-size:11px;color:var(--text3);margin-top:2px;flex-shrink:0">▾</span>':''}</div>
+      ${hasD?`<div class="db">${tr?`<div style="margin-bottom:7px">${tr}</div>`:''}${no?`<div style="margin-bottom:5px">${no}</div>`:''}${tip}${warn}</div>`:''}
+    </div></div>`;
+  });
+  el.innerHTML=h+'</div>';
+});
+
+/* 준비물 */
+const clData={
+  'cl-travel':[{l:'NEX 왕복권',s:'공항 현장 · 여권 지참'},{l:'웰컴 스이카',s:'교통카드'},{l:'항공티켓 출력'},{l:'숙소 바우처 출력'},{l:'빅사이트 등록증 출력'}],
+  'cl-market':[{l:'개별 키워드 도출',s:'시장조사 준비'},{l:'명함 챙기기'}],
+  'cl-personal':[{l:'여권'},{l:'지갑',s:'동전지갑 추천'},{l:'캐리어'},{l:'백팩',s:'여유 쇼핑백'},{l:'충전기'},{l:'보조배터리'},{l:'손풍기'},{l:'우산',s:'비 예보 있음'},{l:'썬크림'},{l:'세면도구'},{l:'화장품'},{l:'옷 2일치',s:'여유분 1벌'},{l:'잠옷'},{l:'편한 신발'},{l:'속옷 2일치'},{l:'양말 2일치'}],
+  'cl-etc':[{l:'멀티탭'},{l:'변압기',s:'사내 2개'},{l:'상비약',s:'소화제 · 지사제 · 두통약'}]
+};
+const clState={};let clTotal=0,clDone=0;
+Object.entries(clData).forEach(([k,items])=>{
+  const c=document.getElementById(k);
+  items.forEach((item,i)=>{
+    const key=k+i;clState[key]=false;clTotal++;
+    const d=document.createElement('div');d.className='ci';
+    d.innerHTML=`<div class="cb2" id="cb-${key}"><svg class="ck-ico" viewBox="0 0 10 10" fill="none"><path d="M1.5 5L4 7.5L8.5 2.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="cl2" id="cl-${key}">${item.l}</div>${item.s?`<div class="cs">${item.s}</div>`:''}</div>`;
+    d.onclick=()=>{
+      const was=clState[key];clState[key]=!was;clDone+=was?-1:1;
+      document.getElementById('cb-'+key).classList.toggle('ck',clState[key]);
+      document.getElementById('cl-'+key).classList.toggle('dn',clState[key]);
+      document.getElementById('pfill').style.width=Math.round(clDone/clTotal*100)+'%';
+      document.getElementById('plabel').textContent=clDone+' / '+clTotal;
+    };
+    c.appendChild(d);
+  });
+});
+document.getElementById('plabel').textContent='0 / '+clTotal;
+
+/* 언어 */
+const phData={
+  la:[{t:'NEX 티켓',jp:'ネックスを1枚ください。',ro:'Nekkusu o ichimai kudasai.',en:'One Narita Express ticket, please.',ko:'나리타 익스프레스 1장 주세요.'},
+      {t:'스이카 충전',jp:'Suicaにチャージしたいです。',ro:'Suika ni chaaji shitai desu.',en:"I'd like to charge my Suica.",ko:'스이카 충전하고 싶어요.'},
+      {t:'긴자역 어디?',jp:'銀座駅はどこですか？',ro:'Ginza-eki wa doko desu ka?',en:'Where is Ginza Station?',ko:'긴자역은 어디예요?'},
+      {t:'어느 출구?',jp:'何番出口を出ればいいですか？',ro:'Nanban deguchi o dereba ii desu ka?',en:'Which exit should I take?',ko:'몇 번 출구로 나가요?'},
+      {t:'환승 어디?',jp:'乗り換えはどこですか？',ro:'Norikae wa doko desu ka?',en:'Where do I transfer?',ko:'환승은 어디서요?'},
+      {t:'코인로커?',jp:'コインロッカーはどこですか？',ro:'Koin rokkaa wa doko desu ka?',en:'Where are the coin lockers?',ko:'코인로커 어디 있나요?'},
+      {t:'택시 불러주세요',jp:'タクシーを呼んでください。',ro:'Takushii o yonde kudasai.',en:'Please call a taxi.',ko:'택시 불러주세요.'}],
+  ls:[{t:'면세 되나요?',jp:'免税はできますか？',ro:'Menzei wa dekimasu ka?',en:'Is tax-free shopping available?',ko:'면세 가능한가요?'},
+      {t:'카드 결제?',jp:'カードで払えますか？',ro:'Kaado de haraemasu ka?',en:'Can I pay by card?',ko:'카드 결제 가능한가요?'},
+      {t:'이거 있나요?',jp:'これはありますか？',ro:'Kore wa arimasu ka?',en:'Do you have this?',ko:'이 상품 있나요?'},
+      {t:'다른 사이즈?',jp:'別のサイズはありますか？',ro:'Betsu no saizu wa arimasu ka?',en:'Another size?',ko:'다른 사이즈 있나요?'},
+      {t:'영수증 주세요',jp:'レシートをください。',ro:'Reshiito o kudasai.',en:'Receipt, please.',ko:'영수증 주세요.'},
+      {t:'면세카운터?',jp:'免税カウンターはどこですか？',ro:'Menzei kauntaa wa doko desu ka?',en:'Tax refund counter?',ko:'면세카운터 어디예요?'},
+      {t:'얼마예요?',jp:'いくらですか？',ro:'Ikura desu ka?',en:'How much?',ko:'얼마예요?'},
+      {t:'전부 얼마?',jp:'全部でいくらですか？',ro:'Zenbu de ikura desu ka?',en:'Total price?',ko:'전부 얼마예요?'},
+      {t:'봉투 주세요',jp:'袋をください。',ro:'Fukuro o kudasai.',en:'A bag, please.',ko:'봉투 주세요.'}],
+  lb:[{t:'한국에서 왔어요',jp:'韓国から来ました。',ro:'Kankoku kara kimashita.',en:"We're from Korea.",ko:'한국에서 왔습니다.'},
+      {t:'명함 교환',jp:'名刺を交換しましょう。',ro:'Meishi o koukan shimashou.',en:'Shall we exchange cards?',ko:'명함 교환합시다.'},
+      {t:'카탈로그 주세요',jp:'カタログをいただけますか？',ro:'Katárogu o itadakemasu ka?',en:'Could I have a catalogue?',ko:'카탈로그 받을 수 있나요?'},
+      {t:'한국 수출 가능?',jp:'韓国への輸出は可能ですか？',ro:'Kankoku e no yushutsu wa kanou desu ka?',en:'Is export to Korea possible?',ko:'한국 수출 가능한가요?'},
+      {t:'최소 주문 수량?',jp:'最低注文数量はいくつですか？',ro:'Saitei chuumon suryo wa ikutsu desu ka?',en:'Minimum order quantity?',ko:'최소 주문 수량은요?'},
+      {t:'도매 가격?',jp:'卸売価格を教えていただけますか？',ro:'Oroshiuri kakaku o oshiete itadakemasu ka?',en:'Wholesale price?',ko:'도매 가격 알려주세요.'},
+      {t:'샘플 받을 수 있나요?',jp:'サンプルをいただけますか？',ro:'Sanpuru o itadakemasu ka?',en:'May I have a sample?',ko:'샘플 받을 수 있나요?'},
+      {t:'가격표 보내주세요',jp:'価格表を送っていただけますか？',ro:'Kakakuhyou o okutte itadakemasu ka?',en:'Send a price list?',ko:'가격표 보내주세요.'},
+      {t:'회원가입',jp:'会員登録をしたいのですが。',ro:'Kaiin touroku o shitai no desu ga.',en:"I'd like to register.",ko:'회원 등록하고 싶어요.'}],
+  lf:[{t:'3명 자리?',jp:'3人ですが、席はありますか？',ro:'San-nin desu ga, seki wa arimasu ka?',en:'Table for three?',ko:'3명 자리 있나요?'},
+      {t:'이걸로 주세요',jp:'これをください。',ro:'Kore o kudasai.',en:'This one, please.',ko:'이걸로 주세요.'},
+      {t:'추천 메뉴?',jp:'おすすめは何ですか？',ro:'Osusume wa nan desu ka?',en:"What do you recommend?",ko:'추천 메뉴 뭔가요?'},
+      {t:'맛있어요!',jp:'美味しいです！',ro:'Oishii desu!',en:"It's delicious!",ko:'맛있어요!'},
+      {t:'계산해 주세요',jp:'お会計をお願いします。',ro:'Okaikei o onegai shimasu.',en:'Check, please.',ko:'계산해 주세요.'},
+      {t:'물 주세요',jp:'お水をください。',ro:'Omizu o kudasai.',en:'Water, please.',ko:'물 주세요.'},
+      {t:'포장 되나요?',jp:'持ち帰りはできますか？',ro:'Mochikaeri wa dekimasu ka?',en:'To go?',ko:'포장 가능한가요?'},
+      {t:'맵지 않게요',jp:'辛くしないでください。',ro:'Karakunai de kudasai.',en:'Not spicy, please.',ko:'맵지 않게 해주세요.'}],
+  lh:[{t:'체크인',jp:'チェックインをお願いします。',ro:'Chekku-in o onegai shimasu.',en:"Check in, please.",ko:'체크인 부탁드려요.'},
+      {t:'짐 맡기기',jp:'荷物を預かってもらえますか？',ro:'Nimotsu o azukatte moraemasu ka?',en:'Keep my luggage?',ko:'짐 맡길 수 있나요?'},
+      {t:'체크아웃',jp:'チェックアウトをお願いします。',ro:'Chekku-auto o onegai shimasu.',en:"Check out, please.",ko:'체크아웃 부탁드려요.'},
+      {t:'와이파이 비번',jp:'Wi-Fiのパスワードを教えてください。',ro:'Waifai no pasuwaado o oshiete kudasai.',en:'Wi-Fi password?',ko:'와이파이 비밀번호요?'},
+      {t:'수건 더 주세요',jp:'タオルをもう少しください。',ro:'Taoru o mou sukoshi kudasai.',en:'More towels, please.',ko:'수건 더 주세요.'},
+      {t:'에어컨 안 돼요',jp:'エアコンが動きません。',ro:'Eakon ga ugokimasen.',en:'AC not working.',ko:'에어컨이 안 돼요.'}],
+  le:[{t:'도와주세요!',jp:'助けてください！',ro:'Tasukete kudasai!',en:'Help me!',ko:'도와주세요!'},
+      {t:'길을 잃었어요',jp:'道に迷いました。',ro:'Michi ni mayoimashita.',en:"I'm lost.",ko:'길을 잃었어요.'},
+      {t:'병원 어디?',jp:'病院はどこですか？',ro:'Byouin wa doko desu ka?',en:'Where is the hospital?',ko:'병원이 어디예요?'},
+      {t:'약국 어디?',jp:'薬局はどこですか？',ro:'Yakkyoku wa doko desu ka?',en:'Where is the pharmacy?',ko:'약국이 어디예요?'},
+      {t:'경찰 불러주세요',jp:'警察を呼んでください。',ro:'Keisatsu o yonde kudasai.',en:'Call the police.',ko:'경찰 불러주세요.'},
+      {t:'지갑 잃어버렸어요',jp:'財布をなくしました。',ro:'Saifu o nakushimashita.',en:'I lost my wallet.',ko:'지갑을 잃어버렸어요.'},
+      {t:'일본어 못해요',jp:'日本語が話せません。',ro:'Nihongo ga hanasemasen.',en:"I don't speak Japanese.",ko:'일본어를 못해요.'},
+      {t:'여기가 어디예요?',jp:'ここはどこですか？',ro:'Koko wa doko desu ka?',en:'Where am I?',ko:'여기가 어디예요?'}]
+};
+function cpL(text,btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='복사됨';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='복사';btn.classList.remove('copied');},1200);
+  });
+}
+Object.entries(phData).forEach(([secId,phrases])=>{
+  const sec=document.getElementById(secId);let html='';
+  phrases.forEach(p=>{
+    const safe=p.jp.replace(/'/g,"\\'");
+    html+=`<div class="pc"><div class="pc-head"><span>${p.t}</span><button class="cpb" onclick="cpL('${safe}',this)">복사</button></div><div class="lr"><span class="ltg lt-jp">일어</span><span class="lj">${p.jp}</span></div><div class="lr"><span class="ltg lt-ro">로마자</span><span class="lo">${p.ro}</span></div><div class="lr"><span class="ltg lt-en">영어</span><span class="le2">${p.en}</span></div><div class="lr"><span class="ltg lt-ko">한국어</span><span class="lk">${p.ko}</span></div></div>`;
+  });
+  sec.innerHTML=html;
+});
+
+/* 편의시설 */
+const icMap={sbux:'i-s',mc:'i-m',wc:'i-w',cv:'i-c'};
+const areaMapUrls={
+  'p-ginza':'https://www.google.com/maps/search/starbucks+convenience+store/@35.6727,139.7675,16z',
+  'p-kinshi':'https://www.google.com/maps/search/convenience+store/@35.6970,139.8130,16z',
+  'p-ikebukuro':'https://www.google.com/maps/search/starbucks+mcdonalds+convenience/@35.7300,139.7100,16z',
+  'p-bigsight':'https://www.google.com/maps/search/lawson+starbucks/@35.6310,139.7955,16z'
+};
+const convData={
+  'p-ginza':{tip:'숙소 도보 5분 내 스타벅스 3곳 · 패밀리마트 2곳 · 로손. 긴자 식스 각 층 화장실 무료.',sections:[
+    {label:'☕ 스타벅스',items:[{type:'sbux',icon:'☕',name:'스타벅스 리저브 — 마로니에도리',dist:'도보 1분',hours:'07:00~21:00',note:'가장 가까움',mapUrl:'https://maps.google.com/?cid=18252843265561510164'},{type:'sbux',icon:'☕',name:'스타벅스 — 마츠야도리 (일본 1호점)',dist:'도보 2분',hours:'07:00~22:30',note:'',mapUrl:'https://maps.google.com/?cid=1063094148739620208'},{type:'sbux',icon:'☕',name:'스타벅스 — 긴자 식스 6F',dist:'도보 5분',hours:'07:00~22:30',note:'',mapUrl:'https://maps.google.com/?cid=1358293578847682985'}]},
+    {label:'🍔 맥도날드',items:[{type:'mc',icon:'🍔',name:'맥도날드 — 긴자',dist:'도보 3분',hours:'06:30~23:00',note:'와이파이',mapUrl:'https://maps.google.com/?cid=13646512840202865544'}]},
+    {label:'🏪 편의점',items:[{type:'cv',icon:'🏪',name:'패밀리마트 — 긴자 5초메',dist:'도보 4분',hours:'24시간',note:'먹는 자리 · 프린터',mapUrl:'https://maps.google.com/?cid=13383741779865586487'},{type:'cv',icon:'🏪',name:'패밀리마트 — 긴자 1초메',dist:'도보 5분',hours:'24시간',note:'ATM',mapUrl:'https://maps.google.com/?cid=12941684662282524822'},{type:'cv',icon:'🏪',name:'로손 — 긴자 7초메',dist:'도보 6분',hours:'24시간',note:'',mapUrl:'https://maps.google.com/?cid=18110473267149105272'}]},
+    {label:'🚻 화장실',items:[{type:'wc',icon:'🚻',name:'화장실 — 긴자 식스 각 층',dist:'도보 5분',hours:'10:30~20:30',note:'무료',mapUrl:'https://maps.google.com/?cid=14973065113911757308'},{type:'wc',icon:'🚻',name:'화장실 — 맥도날드 긴자',dist:'도보 3분',hours:'06:30~23:00',note:'구매 후 이용',mapUrl:'https://maps.google.com/?cid=13646512840202865544'}]}]},
+  'p-kinshi':{tip:'arcakit 건물 내 맥도날드. 패밀리마트 도보 3~5분.',sections:[
+    {label:'🍔 맥도날드',items:[{type:'mc',icon:'🍔',name:'맥도날드 — arcakit 긴시초',dist:'건물 내',hours:'10:00~21:00',note:'',mapUrl:'https://maps.google.com/?cid=14059567148077190349'}]},
+    {label:'🏪 편의점',items:[{type:'cv',icon:'🏪',name:'패밀리마트 — 코토바시 2초메',dist:'도보 3분',hours:'24시간',note:'',mapUrl:'https://maps.google.com/?cid=7747604152170964313'},{type:'cv',icon:'🏪',name:'패밀리마트 — 코토바시 4초메',dist:'도보 5분',hours:'24시간',note:'',mapUrl:'https://maps.google.com/?cid=12821403529618113091'}]},
+    {label:'🚻 화장실',items:[{type:'wc',icon:'🚻',name:'화장실 — arcakit 각 층',dist:'건물 내',hours:'10:00~21:00',note:'무료',mapUrl:'https://maps.google.com/?cid=1491138558072452946'}]}]},
+  'p-ikebukuro':{tip:'맥도날드 서쪽 · 동쪽 24시간. 스타벅스 역 지하 직결.',sections:[
+    {label:'☕ 스타벅스',items:[{type:'sbux',icon:'☕',name:'스타벅스 — 에치카 이케부쿠로 (역 지하)',dist:'역 지하 직결',hours:'07:00~22:30',note:'비 와도 OK',mapUrl:'https://maps.google.com/?cid=10339538928912569636'}]},
+    {label:'🍔 맥도날드',items:[{type:'mc',icon:'🍔',name:'맥도날드 — 이케부쿠로 서쪽',dist:'도보 3분',hours:'24시간',note:'24시간',mapUrl:'https://maps.google.com/?cid=12028680089462959422'},{type:'mc',icon:'🍔',name:'맥도날드 — 이케부쿠로 동쪽',dist:'도보 5분',hours:'24시간',note:'화장실',mapUrl:'https://maps.google.com/?cid=11388067752851710972'}]},
+    {label:'🏪 편의점',items:[{type:'cv',icon:'🏪',name:'패밀리마트 — 니시이케부쿠로',dist:'도보 3분',hours:'24시간',note:'역 서쪽',mapUrl:'https://maps.google.com/?cid=11079700304139484239'}]},
+    {label:'🚻 화장실',items:[{type:'wc',icon:'🚻',name:'화장실 — 이케부쿠로역 내',dist:'역 내부',hours:'운행시간 내',note:'무료',mapUrl:'https://maps.google.com/?cid=4215605841239768467'}]}]},
+  'p-bigsight':{tip:'빅사이트 내 로손 2곳. 행사 시 점심 전에 미리 구매 추천.',sections:[
+    {label:'☕ 스타벅스',items:[{type:'sbux',icon:'☕',name:'스타벅스 — 빅사이트 내',dist:'건물 내',hours:'행사일 08:00~19:00',note:'',mapUrl:'https://maps.google.com/?cid=668705358505329425'}]},
+    {label:'🍔 맥도날드',items:[{type:'mc',icon:'🍔',name:'맥도날드 — 아리아케 파크빌딩',dist:'도보 3분',hours:'07:00~21:00',note:'150석',mapUrl:'https://maps.google.com/?cid=13305203742181170974'}]},
+    {label:'🏪 편의점',items:[{type:'cv',icon:'🏪',name:'로손 — 빅사이트 입구',dist:'건물 내',hours:'08:00~20:00',note:'ATM · 점심 전 미리',mapUrl:'https://maps.google.com/?cid=5101232500625571721'},{type:'cv',icon:'🏪',name:'로손 — 빅사이트 남관 2F',dist:'남관 내',hours:'09:00~19:00',note:'박람회 구역',mapUrl:'https://maps.google.com/?cid=17497452329179044230'}]},
+    {label:'🚻 화장실',items:[{type:'wc',icon:'🚻',name:'화장실 — 빅사이트 각 홀',dist:'건물 내',hours:'08:00~20:00',note:'무료',mapUrl:'https://maps.google.com/?cid=11876362316687890945'}]}]}
+};
+Object.entries(convData).forEach(([areaId,area])=>{
+  const sec=document.getElementById(areaId);
+  let html=`<div class="atip">ℹ️ ${area.tip}</div>`;
+  html+=`<a class="area-map-btn" href="${areaMapUrls[areaId]}" target="_blank">🗺 이 지역 전체 지도 열기</a>`;
+  area.sections.forEach(s=>{
+    html+=`<div class="tyl">${s.label}</div>`;
+    s.items.forEach(item=>{
+      html+=`<div class="cvc"><div class="cvh"><div class="cvi ${icMap[item.type]}">${item.icon}</div><div><div class="cvn">${item.name}</div><div class="cvd">${item.dist}</div></div></div><div class="cvt">⏰ ${item.hours}</div>${item.note?`<span class="cvno">${item.note}</span>`:''}<br><a class="map-btn" href="${item.mapUrl}" target="_blank">📍 구글 지도</a></div>`;
+    });
+  });
+  sec.innerHTML=html;
+});
+
+/* ========== CRM — Supabase ========== */
+const SB_URL='https://xdjnbjgjydvhllyzalpx.supabase.co';
+const SB_KEY='sb_publishable_OutO4MsrAC6cAs2n1brQwg_L2y3jv4B';
+let crmAll=[];
+let crmFiltered=[];
+let crmCat='';
+let crmInited=false;
+
+const FALLBACK=[
+  {id:1,company_name:'(샘플) Miniware',category:'Baby & Kids',booth:'L1-01',description_ko:'이유식 기구 전문',products_ko:'이유식 도구 세트',website:'',email:'',phone:'',memo:''},
+  {id:2,company_name:'(샘플) Pigeon',category:'Baby & Kids',booth:'L2-01',description_ko:'유아용품 종합',products_ko:'젖병·이유식기',website:'',email:'',phone:'',memo:''}
+];
+
+// 주소창에서 성공한 방식과 동일하게 apikey를 URL 파라미터로 전달 (헤더 없음 → CORS preflight 회피)
+function sbUrl(path){
+  const sep=path.includes('?')?'&':'?';
+  return SB_URL+'/rest/v1/'+path+sep+'apikey='+encodeURIComponent(SB_KEY);
+}
+
+async function fetchAllCompanies(){
+  let all=[];
+  const PAGE=1000;
+  let offset=0;
+  while(true){
+    // id가 UUID라서 order=id 대신 company_name 정렬 + offset 페이지네이션
+    const r=await fetch(sbUrl(`companies?select=*&order=company_name.asc&limit=${PAGE}&offset=${offset}`));
+    if(!r.ok){
+      const txt=await r.text().catch(()=>'');
+      throw new Error('HTTP '+r.status+(txt?(' — '+txt.substring(0,150)):''));
+    }
+    const data=await r.json();
+    all=all.concat(data);
+    if(data.length<PAGE)break;
+    offset+=PAGE;
+    if(offset>10000)break; // 안전장치
+  }
+  return all;
+}
+
+async function initCRM(){
+  if(crmInited)return;
+  document.getElementById('crm-body').innerHTML='<div class="crm-loading">⏳ 업체 목록 불러오는 중...</div>';
+  try{
+    crmAll=await fetchAllCompanies();
+    crmInited=true;
+    buildCatFilters();
+    filterCRM();
+  }catch(e){
+    console.error('Supabase 연결 실패:',e);
+    const msg=e&&e.message?e.message:String(e);
+    const isFetchFail=/Failed to fetch|NetworkError|load failed/i.test(msg);
+    crmAll=FALLBACK;
+    crmInited=true;
+    buildCatFilters();
+    filterCRM();
+    let hint='';
+    if(isFetchFail){
+      hint=`<br><small style="display:block;margin-top:6px;line-height:1.6">
+      네트워크 요청이 차단됐어요. 가능한 원인:<br>
+      ① 로컬 파일(file://)에서 열면 CORS 차단될 수 있어요 → <b>Netlify에 업로드</b> 후 열어보세요<br>
+      ② Supabase RLS(Row Level Security)가 켜져 있으면 읽기가 막혀요 → Supabase에서 companies 테이블 <b>SELECT 정책 허용</b> 필요<br>
+      ③ key 또는 URL 오타</small>`;
+    }
+    document.getElementById('crm-body').insertAdjacentHTML('afterbegin',
+      `<div class="crm-error">⚠️ Supabase 연결 실패 — 샘플만 표시 중<br><small>${esc(msg)}</small>${hint}</div>`);
+  }
+}
+
+// ===== 데이터 정제 =====
+// category 컬럼에 "...Categories <전시관분류> Stand <부스>..." 형식의 원문이 들어있음
+// "Categories" 뒤 ~ "Stand"(또는 "Add to Plan"/"Website") 앞의 분류 텍스트만 추출
+const EXPO_KEYWORDS=['Baby & Kids Expo','Table & Kitchenware Expo','Health & Beauty Goods Expo','Health & Beauty Expo','Beauty & Wellness','Sustainable Goods Expo','STYLE x DESIGN Packaging Expo','Design Packaging','Japan Crafts & Souvenirs Expo','Japan Crafts and Souvenirs','GIFTEX','Gifts & Interior Expo','Fandom Goods Expo','Fashion Goods & Accessories Expo','DESIGN TOKYO','ISOT','Stationery'];
+
+// 전시관·분류 영어 → 한국어 표시 매핑 (화면 표시용, 원본 데이터는 그대로 보존)
+const CAT_KO={
+  'Baby & Kids Expo':'베이비·키즈',
+  'Table & Kitchenware Expo':'식기·주방용품',
+  'Health & Beauty Goods Expo':'헬스·뷰티',
+  'Health & Beauty Expo':'헬스·뷰티',
+  'Beauty & Wellness':'뷰티·웰니스',
+  'Beauty & Wellness Products':'뷰티·웰니스',
+  'Sustainable Goods Expo':'친환경·지속가능',
+  'STYLE x DESIGN Packaging Expo':'패키지·디자인',
+  'Design Packaging':'패키지·디자인',
+  'Japan Crafts & Souvenirs Expo':'일본 공예·기념품',
+  'Japan Crafts and Souvenirs':'일본 공예·기념품',
+  'GIFTEX':'선물·인테리어',
+  'GIFTEX - Gifts & Interior Expo':'선물·인테리어',
+  'Gifts & Interior Expo':'선물·인테리어',
+  'Fandom Goods Expo':'팬덤 굿즈',
+  'Fashion Goods & Accessories Expo':'패션·액세서리',
+  'DESIGN TOKYO':'디자인 도쿄',
+  'DESIGN TOKYO - TOKYO DESIGN PRODUCTS FAIR':'디자인 도쿄',
+  'ISOT':'문구·사무용품',
+  'ISOT - INTERNATIONAL STATIONERY & OFFICE PRODUCTS FAIR':'문구·사무용품',
+  'Stationery':'문구·사무용품',
+  'Gifts':'선물',
+  'Variety Goods':'잡화',
+  'Household Goods':'생활용품',
+  'Kitchenware':'주방용품',
+  'Tableware':'식기',
+  'Cutlery':'커트러리',
+  'Interior Goods':'인테리어',
+  'Pet-Related Products':'반려동물용품',
+  'Made in Japan':'일본산',
+  'New Products':'신제품',
+  'Domestic Exhibitors':'일본 출품사',
+  'International Exhibitors':'해외 출품사',
+  'OEM':'OEM',
+  'Private Label Manufacturing':'PB 제조',
+  'Looking for Agents':'에이전트 모집',
+  'Showcasing for the First Time':'첫 출전',
+  'Convenience & Innovative Goods':'편의·혁신',
+  'Smart/Efficient Life Tools':'스마트 생활용품',
+  'Japanese Souvenirs/Gifts for Tourists':'관광 기념품',
+  'Traditional Japanese Culture and Crafts':'일본 전통공예'
+};
+// 영어 분류를 한국어로 (매핑 없으면 원문 그대로)
+function catKo(en){return CAT_KO[en]||en;}
+
+// 원시 category 문자열에서 분류 영역만 잘라냄
+function rawCatSegment(cat){
+  if(!cat)return '';
+  let s=cat;
+  const ci=s.indexOf('Categories');
+  if(ci>=0)s=s.slice(ci+'Categories'.length);
+  // 분류 끝나는 지점에서 자르기
+  s=s.split(/\bStand\b/)[0].split(/\bAdd to Plan\b/)[0].split(/\bWebsite\b/)[0].split(/\bBrands\b/)[0];
+  return s.trim();
+}
+
+// 메인 전시관(가장 앞에 등장하는 알려진 Expo 키워드) 추출 — 영어 원본 반환
+function mainCat(c){
+  const seg=rawCatSegment(c.category);
+  const hay=(seg||c.category||'');
+  let best=null,bestPos=Infinity;
+  EXPO_KEYWORDS.forEach(k=>{
+    const p=hay.indexOf(k);
+    if(p>=0&&p<bestPos){bestPos=p;best=k;}
+  });
+  if(best)return best;
+  // 못 찾으면 분류 영역 첫 콤마 토큰 (짧을 때만)
+  if(seg){
+    const first=seg.split(',')[0].trim();
+    if(first&&first.length<=45&&!/[。、！？\u3002]/.test(first))return first;
+  }
+  return '';
+}
+
+// 카드에 보여줄 분류 태그 목록 (정제된 영역에서 콤마 분리, 중복/긴 것 제거) — 영어 원본
+function catTags(c){
+  const seg=rawCatSegment(c.category);
+  if(!seg)return [];
+  const tags=seg.split(',').map(s=>s.trim())
+    .filter(s=>s&&s.length<=40&&!/[。、！？\u3002]/.test(s)&&!/^\d+$/.test(s));
+  return [...new Set(tags)];
+}
+
+function buildCatFilters(){
+  const cats=[...new Set(crmAll.map(c=>mainCat(c)).filter(Boolean))].sort();
+  const wrap=document.getElementById('crm-filters');
+  wrap.innerHTML=`<button class="crf on" onclick="setCat('',this)">전체</button>`;
+  cats.forEach(cat=>{
+    const btn=document.createElement('button');
+    btn.className='crf';btn.textContent=catKo(cat); // 화면엔 한국어
+    btn.onclick=function(){setCat(cat,this);};      // 내부값은 영어 원본
+    wrap.appendChild(btn);
+  });
+}
+
+function setCat(cat,btn){
+  crmCat=cat;
+  document.querySelectorAll('.crf').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  filterCRM();
+}
+
+function filterCRM(){
+  const q=(document.getElementById('crm-q').value||'').trim().toLowerCase();
+  crmFiltered=crmAll.filter(c=>{
+    const catOk=!crmCat||mainCat(c)===crmCat;
+    if(!catOk)return false;
+    if(!q)return true;
+    // 검색 범위: 업체명, 카테고리(영문+한글), 주요제품, 회사소개
+    const koCats=catTags(c).map(catKo).join(' ')+' '+catKo(mainCat(c));
+    return [c.company_name,c.category,c.products_ko,c.description_ko,koCats].some(v=>v&&v.toLowerCase().includes(q));
+  });
+  document.getElementById('crm-count').textContent=crmFiltered.length+'개';
+  renderCRM();
+}
+
+function renderCRM(){
+  const body=document.getElementById('crm-body');
+  if(!crmFiltered.length){body.innerHTML='<div class="crm-empty">🔍 검색 결과가 없어요</div>';return;}
+  const show=crmFiltered.slice(0,200);
+  body.innerHTML=show.map(c=>cardHTML(c)).join('')+(crmFiltered.length>200?`<div class="crm-empty" style="padding:16px">검색어를 더 입력하면 범위를 좁힐 수 있어요<br><small>상위 200개 표시 중 / 전체 ${crmFiltered.length}개</small></div>`:'');
+}
+
+function cardHTML(c){
+  const hasMemo=(c.memo&&c.memo.trim())||(c.idea_memo&&c.idea_memo.trim());
+  const products=c.products_ko&&c.products_ko.trim()?c.products_ko:'한국어 번역 준비중';
+  const isPrepProducts=!c.products_ko||!c.products_ko.trim();
+
+  // 카테고리 배지
+  const tags=catTags(c);const main=mainCat(c);
+  const ordered=main?[main,...tags.filter(t=>t!==main)]:tags;
+  const orderedKo=ordered.map(catKo);
+  const catBadge=orderedKo.length?`<span class="cc-cat">${esc(orderedKo[0])}</span>${orderedKo.length>1?`<span class="cc-cat-more">+${orderedKo.length-1}</span>`:''}`:'';
+
+  // 관심·별점
+  const isInterest=!!c.interest;
+  const interestBadge=isInterest?'<span style="font-size:11px;color:#D97706;margin-left:6px">★ 관심</span>':'';
+  const pri=Number(c.priority)||0;
+  const starsHtml=[1,2,3,4,5].map(n=>`<span class="star${n<=pri?' on':''}" onclick="event.stopPropagation();setStar('${c.id}',${n})">★</span>`).join('');
+
+  // 링크
+  const webHref=c.website?(c.website.startsWith('http')?c.website:'https://'+c.website):'';
+  const links=[
+    webHref?`<a class="cc-link" href="${webHref}" target="_blank">🌐 홈페이지</a>`:'',
+    c.email?`<a class="cc-link" href="mailto:${esc(c.email)}">✉️ 이메일</a>`:'',
+    c.phone?`<a class="cc-link" href="tel:${esc(c.phone)}">📞 ${esc(c.phone)}</a>`:''
+  ].filter(Boolean).join('');
+
+  const desc=c.description_ko&&c.description_ko.trim()?c.description_ko:'';
+
+  return `<div class="cc" id="card-${c.id}">
+    <div onclick="toggleCard(this.closest('.cc'),'${c.id}')">
+      <div class="cc-head">
+        <div class="cc-name">${esc(c.company_name||'-')}${interestBadge}${hasMemo?'<span class="memo-star"></span>':''}</div>
+        ${c.booth?`<span class="cc-booth">부스 ${esc(c.booth)}</span>`:''}
+      </div>
+      ${catBadge?`<div style="margin-bottom:5px">${catBadge}</div>`:''}
+      <div class="cc-row" style="margin-bottom:0">
+        <span class="cc-label">주요제품</span>
+        <span style="${isPrepProducts?'color:var(--text3);font-style:italic':''}">${isPrepProducts?products:esc(products).substring(0,90)+(products.length>90?'…':'')}
+        </span>
+      </div>
+    </div>
+    <div class="cc-detail" id="cd-${c.id}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 8px">
+        <button class="cc-interest${isInterest?' on':''}" id="int-${c.id}" onclick="event.stopPropagation();toggleInterest('${c.id}')">
+          ${isInterest?'★ 관심':'☆ 관심'}
+        </button>
+        <div class="stars" id="stars-${c.id}">${starsHtml}</div>
+      </div>
+      ${desc?`<div class="cc-row" style="margin-bottom:8px"><span class="cc-label">회사소개</span><span style="line-height:1.6">${esc(desc)}</span></div>`:''}
+      ${orderedKo.length>1?`<div class="cc-row" style="margin-bottom:8px"><span class="cc-label">카테고리</span><span>${esc(orderedKo.join(' · '))}</span></div>`:''}
+      ${links?`<div style="margin-bottom:10px">${links}</div>`:''}
+      <div class="cc-section-title">📋 상담 정보</div>
+      <div class="cc-form-grid">
+        <div class="cc-field">
+          <label>담당자명</label>
+          <input class="cc-input" id="contact-${c.id}" type="text" placeholder="담당자 이름" value="${esc(c.contact_name||'')}">
+        </div>
+        <div class="cc-field">
+          <label>담당자 이메일</label>
+          <input class="cc-input" id="cemail-${c.id}" type="email" placeholder="name@company.com" value="${esc(c.contact_email||'')}">
+        </div>
+        <div class="cc-field">
+          <label>MOQ</label>
+          <input class="cc-input" id="moq-${c.id}" type="text" placeholder="최소 주문 수량" value="${esc(c.moq||'')}">
+        </div>
+        <div class="cc-field">
+          <label>단가</label>
+          <input class="cc-input" id="price-${c.id}" type="text" placeholder="단가 / 통화" value="${esc(c.unit_price||'')}">
+        </div>
+      </div>
+      <div class="cc-section-title">📝 상담 메모</div>
+      <textarea class="cc-memo" id="memo-${c.id}" placeholder="상담 내용, 팔로업 여부, 특이사항 등">${esc(c.memo||'')}
+      </textarea>
+      <div class="cc-section-title" style="margin-top:8px">💡 잼먹 적용 아이디어</div>
+      <textarea class="cc-memo" id="idea-${c.id}" placeholder="잼먹 제품/상세페이지/소싱 적용 아이디어">${esc(c.idea_memo||'')}
+      </textarea>
+      <button class="cc-save" id="save-${c.id}" onclick="event.stopPropagation();saveCard('${c.id}')">저장</button>
+    </div>
+  </div>`;
+}
+
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function toggleCard(el,id){
+  const det=document.getElementById('cd-'+id);
+  if(det)det.classList.toggle('open');
+}
+
+// 관심 토글 (즉시 저장)
+async function toggleInterest(id){
+  const idx=crmAll.findIndex(c=>String(c.id)===String(id));
+  if(idx<0)return;
+  const newVal=!crmAll[idx].interest;
+  crmAll[idx].interest=newVal;
+  // 버튼 UI 즉시 업데이트
+  const btn=document.getElementById('int-'+id);
+  if(btn){btn.textContent=newVal?'★ 관심':'☆ 관심';btn.classList.toggle('on',newVal);}
+  // 카드 요약 배지 업데이트
+  const nameEl=document.querySelector(`#card-${id} .cc-name`);
+  if(nameEl){
+    const badge=nameEl.querySelector('.interest-badge');
+    if(newVal&&!badge){
+      const sp=document.createElement('span');
+      sp.className='interest-badge';sp.style.cssText='font-size:11px;color:#D97706;margin-left:6px';
+      sp.textContent='★ 관심';nameEl.appendChild(sp);
+    }else if(!newVal&&badge){badge.remove();}
+  }
+  await sbPatch(id,{interest:newVal});
+}
+
+// 별점 클릭 (즉시 저장)
+async function setStar(id,n){
+  const idx=crmAll.findIndex(c=>String(c.id)===String(id));
+  if(idx<0)return;
+  crmAll[idx].priority=n;
+  // 별 UI 즉시 업데이트
+  const wrap=document.getElementById('stars-'+id);
+  if(wrap){wrap.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('on',i<n));}
+  await sbPatch(id,{priority:n});
+}
+
+// 공통 PATCH 헬퍼
+async function sbPatch(id,data){
+  try{
+    const r=await fetch(sbUrl('companies?id=eq.'+encodeURIComponent(id)),{
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(data)
+    });
+    if(!r.ok)throw new Error('HTTP '+r.status);
+  }catch(e){console.error('저장 실패:',e);}
+}
+
+// 전체 폼 저장
+async function saveCard(id){
+  const btn=document.getElementById('save-'+id);
+  btn.textContent='저장 중...';btn.disabled=true;
+  const data={
+    contact_name: (document.getElementById('contact-'+id)||{}).value||null,
+    contact_email:(document.getElementById('cemail-'+id)||{}).value||null,
+    moq:          (document.getElementById('moq-'+id)||{}).value||null,
+    unit_price:   (document.getElementById('price-'+id)||{}).value||null,
+    memo:         (document.getElementById('memo-'+id)||{}).value||null,
+    idea_memo:    (document.getElementById('idea-'+id)||{}).value||null,
+  };
+  try{
+    const r=await fetch(sbUrl('companies?id=eq.'+encodeURIComponent(id)),{
+      method:'PATCH',
+      headers:{'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(data)
+    });
+    if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('HTTP '+r.status+(t?' — '+t.substring(0,120):''));}
+    // 로컬 캐시 업데이트
+    const idx=crmAll.findIndex(c=>String(c.id)===String(id));
+    if(idx>=0)Object.assign(crmAll[idx],data);
+    btn.textContent='✓ 저장됨';btn.classList.add('cc-saved');
+    setTimeout(()=>{btn.textContent='저장';btn.classList.remove('cc-saved');btn.disabled=false;},2000);
+  }catch(e){
+    btn.textContent='실패 — 재시도';btn.disabled=false;
+    alert('저장 실패: '+e.message);
+  }
+}
+</script>
+</body>
+</html>
