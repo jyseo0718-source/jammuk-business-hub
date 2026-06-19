@@ -3,8 +3,17 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"/>
-<title>잼먹팀 도쿄 출장 — 6월</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>잼먹 도쿄</title>
+<!-- 폰 홈 화면 추가 시 앱처럼 보이게 하는 설정 -->
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="잼먹 도쿄"/>
+<meta name="theme-color" content="#FAFAF9"/>
+<!-- 홈 아이콘 (🗼 이모지를 SVG로 — 별도 이미지 파일 불필요) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23FAFAF9'/%3E%3Ctext x='90' y='128' font-size='100' text-anchor='middle'%3E%F0%9F%97%BC%3C/text%3E%3C/svg%3E"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' font-size='72' text-anchor='middle'%3E%F0%9F%97%BC%3C/text%3E%3C/svg%3E"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -365,7 +374,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans
 <button class="crf" onclick="setMarketFilter('memo',this)">메모 있음</button>
 <button class="crf" onclick="setMarketFilter('photo',this)">사진 있음</button>
 </div>
-<div class="atip">📱 원본 사진은 휴대폰 앨범에 보관하고, 웹에는 기록용 사진만 저장하는 구조를 권장합니다.</div>
+<div class="atip">☁️ 시장조사 기록·사진은 팀 전체가 공유합니다. (박람회·예산과 동일)</div>
 <div id="market-body"><div class="crm-loading">🏬 시장조사 탭을 클릭하면 매장 기록을 불러옵니다</div></div>
 </div>
 <!-- 리포트 -->
@@ -881,9 +890,13 @@ async function delPhoto(id,index){
   if(wrap)wrap.innerHTML=photoThumbsHTML(id,urls);
 }
 
-/* ========== 시장조사 ========== */
-const MARKET_KEY='jammeok_market_v3';
+/* ========== 시장조사 (Supabase 팀 공유) ========== */
+const MARKET_KEY='jammeok_market_v3';        // 로컬 백업용
+const MARKET_STATE_KEY='market';             // app_state 테이블의 key
 let marketFilter='';
+let marketState={};                          // {id:{memo,idea,...}} — Supabase에서 불러온 팀 공유 데이터
+let marketLoaded=false;
+let marketSaveTimer=null;
 const marketBase=[
   {id:'akachan-kinshi',name:'아카짱혼포 긴시초',area:'긴시초',memo:'',idea:'',priceName:'',price:'',purchased:false,online:false,soldout:false,need:false,photos:[]},
   {id:'toys-ikebukuro',name:'토이저러스 이케부쿠로',area:'이케부쿠로',memo:'',idea:'',priceName:'',price:'',purchased:false,online:false,soldout:false,need:false,photos:[]},
@@ -894,20 +907,33 @@ const marketBase=[
   {id:'etoile-kaito',name:'에토와루 카이토',area:'니혼바시',memo:'',idea:'',priceName:'',price:'',purchased:false,online:false,soldout:false,need:false,photos:[]}
 ];
 function getMarket(){
-  const saved=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');
-  return marketBase.map(m=>Object.assign({},m,saved[m.id]||{}));
+  return marketBase.map(m=>Object.assign({},m,marketState[m.id]||{}));
+}
+// Supabase에 저장 (디바운스 — 0.8초 안에 추가 변경 없으면 전송)
+function marketPersist(){
+  // 로컬 백업도 같이 (네트워크 끊겨도 안 잃게)
+  try{localStorage.setItem(MARKET_KEY,JSON.stringify(marketState));}catch(e){}
+  clearTimeout(marketSaveTimer);
+  marketSaveTimer=setTimeout(async()=>{
+    try{
+      const r=await fetch(sbUrl('app_state'),{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},
+        body:JSON.stringify({key:MARKET_STATE_KEY,value:JSON.stringify(marketState)})
+      });
+      if(!r.ok)throw new Error('HTTP '+r.status);
+    }catch(e){console.error('시장조사 저장 실패:',e);}
+  },800);
 }
 function saveMarket(id,data){
-  const saved=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');
-  saved[id]=Object.assign(saved[id]||{},data);
-  localStorage.setItem(MARKET_KEY,JSON.stringify(saved));
+  marketState[id]=Object.assign(marketState[id]||{},data);
+  marketPersist();
   renderMarket();
 }
 // 화면을 다시 그리지 않고 저장만 (포커스/스크롤 유지)
 function saveMarketSilent(id,data){
-  const saved=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');
-  saved[id]=Object.assign(saved[id]||{},data);
-  localStorage.setItem(MARKET_KEY,JSON.stringify(saved));
+  marketState[id]=Object.assign(marketState[id]||{},data);
+  marketPersist();
 }
 // 구매 상태 버튼: 저장하되 화면은 그 버튼만 토글 (카드 안 닫힘)
 function toggleMarketStatus(btn){
@@ -917,7 +943,26 @@ function toggleMarketStatus(btn){
   btn.classList.toggle('on',nowOn);
   saveMarketSilent(id,{[key]:nowOn});
 }
-function initMarket(){renderMarket();}
+async function initMarket(){
+  if(!marketLoaded){
+    const body=document.getElementById('market-body');
+    if(body)body.innerHTML='<div class="crm-loading">⏳ 시장조사 기록 불러오는 중...</div>';
+    try{
+      const r=await fetch(sbUrl('app_state?select=value&key=eq.'+MARKET_STATE_KEY));
+      if(r.ok){
+        const d=await r.json();
+        if(d.length&&d[0].value){marketState=JSON.parse(d[0].value)||{};}
+      }
+      marketLoaded=true;
+    }catch(e){
+      console.error('시장조사 불러오기 실패:',e);
+      // 실패 시 로컬 백업이라도
+      try{marketState=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');}catch(_){marketState={};}
+      marketLoaded=true;
+    }
+  }
+  renderMarket();
+}
 function setMarketFilter(f,btn){marketFilter=f;document.querySelectorAll('#market .crf').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderMarket();}
 function renderMarket(){
   const body=document.getElementById('market-body');if(!body)return;
@@ -988,18 +1033,32 @@ function saveMarketCard(id,btn){
   const idea=(document.getElementById('market-idea-'+id)||{}).value||'';
   const priceName=(document.getElementById('market-pname-'+id)||{}).value||'';
   const price=(document.getElementById('market-price-'+id)||{}).value||'';
-  const saved=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');
-  saved[id]=Object.assign(saved[id]||{},{memo,idea,priceName,price});
-  localStorage.setItem(MARKET_KEY,JSON.stringify(saved));
+  marketState[id]=Object.assign(marketState[id]||{},{memo,idea,priceName,price});
+  marketPersist();
   btn.textContent='✓ 저장됨';btn.classList.add('cc-saved');
   setTimeout(()=>{btn.textContent='💾 저장';btn.classList.remove('cc-saved');},2000);
 }
 
-function addMarketPhoto(id,input){
+// 시장조사 사진 — 박람회와 동일하게 Supabase Storage 업로드 (팀 공유)
+async function addMarketPhoto(id,input){
   const file=input.files&&input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=()=>{const m=getMarket().find(x=>x.id===id);const photos=(m.photos||[]).slice();photos.push(reader.result);saveMarket(id,{photos});};
-  reader.readAsDataURL(file);
+  const lbl=input.closest('.cc-photo-add');
+  if(lbl){lbl.classList.add('uploading');lbl.firstChild.textContent='업로드중';}
+  try{
+    const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+    const path=`market_${id}_${Date.now()}.${ext}`;
+    const upUrl=SB_URL+'/storage/v1/object/'+PHOTO_BUCKET+'/'+encodeURIComponent(path);
+    const r=await fetch(upUrl,{method:'POST',headers:{'Content-Type':file.type||'image/jpeg','x-upsert':'true','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY},body:file});
+    if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('업로드 실패 HTTP '+r.status+(t?' — '+t.substring(0,120):''));}
+    const publicUrl=SB_URL+'/storage/v1/object/public/'+PHOTO_BUCKET+'/'+encodeURIComponent(path);
+    const m=getMarket().find(x=>x.id===id);
+    const photos=(m.photos||[]).slice();
+    photos.push(publicUrl);
+    saveMarket(id,{photos});
+  }catch(e){
+    alert('사진 업로드 실패: '+e.message+'\n\n확인할 것:\n① Supabase에 "'+PHOTO_BUCKET+'" 버킷이 있는지\n② 버킷이 Public인지\n③ Storage 정책에서 anon(익명) INSERT 허용했는지');
+    if(lbl){lbl.classList.remove('uploading');lbl.firstChild.textContent='+';}
+  }
 }
 function delMarketPhoto(id,i){const m=getMarket().find(x=>x.id===id);const photos=(m.photos||[]).slice();photos.splice(i,1);saveMarket(id,{photos});}
 
