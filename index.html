@@ -853,8 +853,8 @@ async function uploadPhoto(id,input){
   try{
     const ext=(file.name.split('.').pop()||'jpg').toLowerCase();
     const path=`${id}_${Date.now()}.${ext}`;
-    const upUrl=SB_URL+'/storage/v1/object/'+PHOTO_BUCKET+'/'+encodeURIComponent(path)+'?apikey='+encodeURIComponent(SB_KEY);
-    const r=await fetch(upUrl,{method:'POST',headers:{'Content-Type':file.type||'image/jpeg','x-upsert':'true'},body:file});
+    const upUrl=SB_URL+'/storage/v1/object/'+PHOTO_BUCKET+'/'+encodeURIComponent(path);
+    const r=await fetch(upUrl,{method:'POST',headers:{'Content-Type':file.type||'image/jpeg','x-upsert':'true','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY},body:file});
     if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('업로드 실패 HTTP '+r.status+(t?' — '+t.substring(0,120):''));}
     const publicUrl=SB_URL+'/storage/v1/object/public/'+PHOTO_BUCKET+'/'+encodeURIComponent(path);
     const idx=crmAll.findIndex(c=>String(c.id)===String(id));
@@ -866,7 +866,7 @@ async function uploadPhoto(id,input){
     const wrap=document.getElementById('photos-'+id);
     if(wrap)wrap.innerHTML=photoThumbsHTML(id,urls);
   }catch(e){
-    alert('사진 업로드 실패: '+e.message+'\n\n(Storage 버킷 public 설정 및 정책을 확인하세요)');
+    alert('사진 업로드 실패: '+e.message+'\n\n확인할 것:\n① Supabase에 "'+PHOTO_BUCKET+'" 버킷이 있는지\n② 버킷이 Public인지\n③ Storage 정책에서 anon(익명) INSERT 허용했는지');
     if(addBtn){addBtn.classList.remove('uploading');addBtn.firstChild.textContent='+';}
   }
 }
@@ -902,6 +902,20 @@ function saveMarket(id,data){
   saved[id]=Object.assign(saved[id]||{},data);
   localStorage.setItem(MARKET_KEY,JSON.stringify(saved));
   renderMarket();
+}
+// 화면을 다시 그리지 않고 저장만 (포커스/스크롤 유지)
+function saveMarketSilent(id,data){
+  const saved=JSON.parse(localStorage.getItem(MARKET_KEY)||'{}');
+  saved[id]=Object.assign(saved[id]||{},data);
+  localStorage.setItem(MARKET_KEY,JSON.stringify(saved));
+}
+// 구매 상태 버튼: 저장하되 화면은 그 버튼만 토글 (카드 안 닫힘)
+function toggleMarketStatus(btn){
+  const id=btn.getAttribute('data-mid');
+  const key=btn.getAttribute('data-key');
+  const nowOn=!btn.classList.contains('on');
+  btn.classList.toggle('on',nowOn);
+  saveMarketSilent(id,{[key]:nowOn});
 }
 function initMarket(){renderMarket();}
 function setMarketFilter(f,btn){marketFilter=f;document.querySelectorAll('#market .crf').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderMarket();}
@@ -958,10 +972,10 @@ function marketCard(m){
       </div>
       <div class="cc-section-title">🛒 구매 상태</div>
       <div class="market-status">
-        <button class="${m.purchased?'on':''}" onclick="event.stopPropagation();saveMarket('${m.id}',{purchased:${!m.purchased}})">구매 완료</button>
-        <button class="${m.online?'on':''}" onclick="event.stopPropagation();saveMarket('${m.id}',{online:${!m.online}})">온라인 구매</button>
-        <button class="${m.soldout?'on':''}" onclick="event.stopPropagation();saveMarket('${m.id}',{soldout:${!m.soldout}})">품절</button>
-        <button class="${m.need?'on':''}" onclick="event.stopPropagation();saveMarket('${m.id}',{need:${!m.need}})">구매 필요</button>
+        <button class="${m.purchased?'on':''}" data-mid="${m.id}" data-key="purchased" onclick="event.stopPropagation();toggleMarketStatus(this)">구매 완료</button>
+        <button class="${m.online?'on':''}" data-mid="${m.id}" data-key="online" onclick="event.stopPropagation();toggleMarketStatus(this)">온라인 구매</button>
+        <button class="${m.soldout?'on':''}" data-mid="${m.id}" data-key="soldout" onclick="event.stopPropagation();toggleMarketStatus(this)">품절</button>
+        <button class="${m.need?'on':''}" data-mid="${m.id}" data-key="need" onclick="event.stopPropagation();toggleMarketStatus(this)">구매 필요</button>
       </div>
       <button class="cc-save" id="market-save-${m.id}" onclick="event.stopPropagation();saveMarketCard('${m.id}',this)">💾 저장</button>
     </div>
